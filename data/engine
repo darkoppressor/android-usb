@@ -1,0 +1,82 @@
+<engine>
+	// Engine settings //
+	
+	name:android-usb
+	home_directory:android-usb
+	developer:Kevin Wells
+	logical_screen_width:1280
+	logical_screen_height:720
+	resolution_mode:scaling
+	logic_update_rate:60.0
+	frame_rate_max:200.0
+	axis_scroll_rate:5
+	scrolling_buttons_offset:60
+	cursor_width:2
+	cursor_height:2
+	console_height:16
+	chat_height:16
+	sound_falloff:64.0
+	window_border_thickness:2.0
+    gui_border_thickness:1.0
+	touch_finger_size:4.0
+	touch_controller_shoulders:false
+	touch_controller_guide:false
+	touch_controller_xy:false
+	default_font:standard
+	tooltip_font:small
+	toast_font:small
+	toast_length_short:3
+	toast_length_medium:5
+	toast_length_long:7
+	console_move_speed:3840
+	console_max_command_length:181
+	console_max_log_recall:1000
+	console_max_command_recall:1000
+	console_font:small
+	console_font_color:
+	console_opacity:0.9
+	chat_move_speed:0
+	chat_max_command_length:181
+	chat_max_log_recall:1000
+	chat_max_command_recall:1000
+	chat_font:small
+	chat_font_color:
+	chat_opacity:0.9
+	chat_line_timeout:10000
+	gui_selector_style:standard
+	controller_dead_zone:8000
+	controller_text_entry_small:false
+	cursor_render_always:false
+	cursor:standard
+	cursor_mouse_over:mouse_over
+	color_theme:standard
+	starting_windows:browser
+	
+	// Default engine options //
+	
+	default_save_location:home
+	
+	default_screen_width:1280
+	default_screen_height:720
+	default_fullscreen_state:false
+	default_fullscreen_mode:standard
+	
+	default_vsync:false
+	default_accelerometer_controller:false
+	default_touch_controller:true
+	default_touch_controller_opacity:0.45
+	default_font_shadows:true
+	default_screen_keyboard:true
+	default_hw_cursor:true
+	default_bind_cursor:false
+	
+	default_fps:false
+	default_dev:false
+	default_volume_global:1.0
+	default_volume_sound:1.0
+	default_volume_music:0.3
+	default_mute_global:false
+	default_mute_sound:false
+	default_mute_music:false
+</engine>
+

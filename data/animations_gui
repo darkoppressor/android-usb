@@ -1,0 +1,7 @@
+<animation>
+	name:text_selector
+	frame_count:2
+	animation_speed:500
+	frame_width:12
+	end_behavior:continue
+</animation>

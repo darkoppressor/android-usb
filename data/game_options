@@ -1,0 +1,125 @@
+<game_option>
+	name:cl_adb_path
+	default:adb\adb.exe
+	description:The path to the adb executable.
+</game_option>
+
+<game_option>
+	name:cl_starting_path
+	default:$EXTERNAL_STORAGE
+	description:The initial path to start in each time the program is run.
+</game_option>
+
+<game_option>
+	name:cl_effect_limit
+	default:8192
+	description:The maximum number of simultaneous effects.
+</game_option>
+
+<game_option>
+	name:cl_screen_shake
+	default:true
+	description:Enable screen shake effects.
+</game_option>
+
+<game_option>
+	name:cl_camera_speed
+	default:960.0
+	description:The speed of camera movement with the directional keys in pixels/second.
+</game_option>
+
+<game_option>
+	name:cl_camera_zoom
+	default:1.0
+	description:The starting zoom level of the camera.
+</game_option>
+
+<game_option>
+	name:cl_name
+	default:Newbie
+	description:Your name.
+</game_option>
+
+<game_option>
+	name:cl_chat_timestamps
+	default:true
+	description:Show timestamps in chat.
+</game_option>
+
+<game_option>
+	name:cl_network_rate_bytes
+	default:10000
+	description:The desired rate for receiving updates from the server in bytes/second.
+</game_option>
+
+<game_option>
+	name:cl_network_rate_updates
+	default:20
+	description:The desired rate for receiving updates from the server in updates/second.
+</game_option>
+
+<game_option>
+	name:cl_network_rate_commands
+	default:30
+	description:The rate for sending command updates to the server in updates/second.
+</game_option>
+
+<game_option>
+	name:sv_max_players
+	default:4
+	description:The maximum allowed number of players.
+</game_option>
+
+<game_option>
+	name:sv_network_max_clients
+	default:3
+	description:The maximum allowed number of connected clients.
+</game_option>
+
+<game_option>
+	name:sv_network_port
+	default:60000
+	description:The port to run the server on.
+</game_option>
+
+<game_option>
+	name:sv_network_password
+	default:
+	description:The password required for clients to connect.
+</game_option>
+
+<game_option>
+	name:sv_network_frequent_connection_protection
+	default:false
+	description:Enable protection against rapid reconnects.
+</game_option>
+
+<game_option>
+	name:sv_network_ignore_checksum
+	default:false
+	description:Ignore connecting clients' checksums.
+</game_option>
+
+<game_option>
+	name:sv_network_rate_bytes_min
+	default:0
+	description:The minimum allowed rate for sending updates to clients in bytes/second.\n - 0 = unlimited
+</game_option>
+
+<game_option>
+	name:sv_network_rate_bytes_max
+	default:0
+	description:The maximum allowed rate for sending updates to clients in bytes/second.\n - 0 = unlimited
+</game_option>
+
+<game_option>
+	name:sv_network_rate_updates_min
+	default:10
+	description:The minimum allowed rate for sending updates to clients in updates/second.\n - 0 = unlimited
+</game_option>
+
+<game_option>
+	name:sv_network_rate_updates_max
+	default:60
+	description:The maximum allowed rate for sending updates to clients in updates/second.\n - 0 = unlimited
+</game_option>

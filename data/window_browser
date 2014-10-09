@@ -1,0 +1,20 @@
+<window>
+	name:browser
+	starting_position:-1,-1
+	width:1280
+	height:720
+	title:Android USB Browser
+	scrolling_buttons:browser
+	disallow_closing:true
+	
+	<info>
+		location:2,8
+		text:Press F1 for help
+	</info>
+	
+	<info>
+		location:2,36
+		special_text:browser_current_path
+	</info>
+	
+</window>

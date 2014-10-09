@@ -1,0 +1,70 @@
+//** Game Colors **//
+
+
+
+//** Engine Colors **//
+
+<color>
+	name:ui_white
+	rgb:230,230,230
+</color>
+
+<color>
+	name:ui_black
+	rgb:26,26,26
+</color>
+
+<color>
+	name:ui_gray
+	rgb:191,191,191
+</color>
+
+<color>
+	name:ui_0
+	rgb:230,230,230
+</color>
+
+<color>
+	name:ui_1
+	rgb:204,107,10
+</color>
+
+<color>
+	name:ui_2
+	rgb:166,87,8
+</color>
+
+<color>
+	name:ui_3
+	rgb:128,67,6
+</color>
+
+<color>
+	name:text_input_blue
+	rgb:10,10,204
+</color>
+
+<color>
+	name:text_input_yellow
+	rgb:204,204,10
+</color>
+
+<color>
+	name:text_input_red
+	rgb:204,10,10
+</color>
+
+<color>
+	name:text_input_green
+	rgb:54,179,54
+</color>
+
+<color>
+	name:white
+	rgb:255,255,255
+</color>
+
+<color>
+	name:red
+	rgb:255,0,0
+</color>

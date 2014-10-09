@@ -1,0 +1,39 @@
+<game_command>
+	name:help
+	title:Help
+	description:View the help screen
+	developer:false
+	key:F1
+	controller_button:back
+	controller_axis:
+</game_command>
+
+<game_command>
+	name:select_all
+	title:Select All
+	description:Select all files/directories in the current directory (must hold Control)
+	developer:false
+	key:A
+	controller_button:
+	controller_axis:
+</game_command>
+
+<game_command>
+	name:copy
+	title:Copy
+	description:Copy all currently selected files to the computer (must hold Control)
+	developer:false
+	key:C
+	controller_button:
+	controller_axis:
+</game_command>
+
+<game_command>
+	name:delete
+	title:Delete
+	description:Delete all currently selected files
+	developer:false
+	key:Delete
+	controller_button:
+	controller_axis:
+</game_command>

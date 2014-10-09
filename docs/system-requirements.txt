@@ -1,0 +1,36 @@
+Windows
+OS: XP / Vista / 7 / 8
+Architecture: x86 / x86_64
+
+Android
+OS: 2.3.3 Gingerbread (API level 10) or newer
+Architecture: armeabi / armeabi-v7a / x86
+
+OS X
+OS: 10.7 Lion / 10.8 Mountain Lion / 10.9 Mavericks
+Architecture: x86_64
+
+Linux
+Architecture: x86 / x86_64
+Requires glibc 2.11 or newer
+
+Minimum:
+Processor: 2 GHz
+Memory: 2 GB
+Graphics: Video card made within the last 4 years. Integrated graphics may or may not work.
+Sound: None required, although you will need a sound device for sound...
+Hard Drive: 50 MB
+Network: None required
+
+Recommended:
+Processor: 3 Ghz
+Memory: 4 GB
+Graphics: Video card made within the last 2 years. Integrated graphics may or may not work.
+Sound: We recommend you have a sound device. So you can have sound.
+Hard Drive: 50 MB
+Network: None required
+
+Input Support:
+Keyboard
+Keyboard and Mouse
+Any controller that SDL supports. This includes, but is not limited to: Xbox 360, PS3, and PS4 controllers

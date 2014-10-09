@@ -1,0 +1,23 @@
+<color_theme>
+	name:standard
+	window_font:ui_0
+	window_title_bar:ui_1
+	window_background:ui_2
+	window_border:ui_3
+	button_font:ui_0
+	button_background:ui_2
+	button_background_moused:ui_1
+	button_background_click:ui_3
+	button_border:ui_3
+	tooltip_font:ui_0
+	tooltip_background:ui_2
+	tooltip_border:ui_3
+	toast_font:ui_0
+	toast_background:ui_2
+	toast_border:ui_3
+	information_font:ui_0
+	information_background:ui_2
+	information_border:ui_3
+	gui_selector_1:ui_3
+	gui_selector_2:ui_0
+</color_theme>

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="android-usb" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option extended_obj_names="1" />
+		<Build>
+			<Target title="Release-Windows-x86_64">
+				<Option platforms="Windows;" />
+				<Option output="Android-Usb-Windows-x86_64.exe" prefix_auto="1" extension_auto="0" />
+				<Option object_output=".objs/windows-x86_64" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O2" />
+					<Add option="-w" />
+					<Add option="-DGAME_OS_WINDOWS" />
+					<Add directory="C:/Development/c++/SDL2/x86_64/include/SDL2" />
+					<Add directory="C:/Development/c++/SDL2_image/x86_64/include/SDL2" />
+					<Add directory="C:/Development/c++/SDL2_mixer/x86_64/include/SDL2" />
+					<Add directory="C:/Development/c++/boost" />
+					<Add directory="C:/Development/c++/raknet" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lmingw32" />
+					<Add option="-Wl,--stack=67108864" />
+					<Add option="-lws2_32" />
+					<Add option="-lwinmm" />
+					<Add library="C:\Development\c++\SDL2_image\x86_64\lib\libSDL2_image.dll.a" />
+					<Add library="C:\Development\c++\SDL2_mixer\x86_64\lib\libSDL2_mixer.dll.a" />
+					<Add library="C:\Development\c++\SDL2\x86_64\lib\libSDL2main.a" />
+					<Add library="C:\Development\c++\SDL2\x86_64\lib\libSDL2.dll.a" />
+					<Add library="C:\Development\c++\raknet\raknet\Lib\DLL\Lib\x86_64\libRakNet.a" />
+					<Add library="C:\Development\c++\boost\stage\lib\x86_64\libboost_system-mt.a" />
+					<Add library="C:\Development\c++\boost\stage\lib\x86_64\libboost_filesystem-mt.a" />
+				</Linker>
+			</Target>
+			<Target title="Release-Windows-x86">
+				<Option platforms="Windows;" />
+				<Option output="Android-Usb-Windows-x86.exe" prefix_auto="1" extension_auto="0" />
+				<Option object_output=".objs/windows-x86" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O2" />
+					<Add option="-w" />
+					<Add option="-m32" />
+					<Add option="-DGAME_OS_WINDOWS" />
+					<Add directory="C:/Development/c++/SDL2/x86/include/SDL2" />
+					<Add directory="C:/Development/c++/SDL2_image/x86/include/SDL2" />
+					<Add directory="C:/Development/c++/SDL2_mixer/x86/include/SDL2" />
+					<Add directory="C:/Development/c++/boost" />
+					<Add directory="C:/Development/c++/raknet" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-m32" />
+					<Add option="-lmingw32" />
+					<Add option="-Wl,--stack=67108864" />
+					<Add option="-lws2_32" />
+					<Add option="-lwinmm" />
+					<Add library="C:\Development\c++\SDL2_image\x86\lib\libSDL2_image.dll.a" />
+					<Add library="C:\Development\c++\SDL2_mixer\x86\lib\libSDL2_mixer.dll.a" />
+					<Add library="C:\Development\c++\SDL2\x86\lib\libSDL2main.a" />
+					<Add library="C:\Development\c++\SDL2\x86\lib\libSDL2.dll.a" />
+					<Add library="C:\Development\c++\raknet\raknet\Lib\DLL\Lib\x86\libRakNet.a" />
+					<Add library="C:\Development\c++\boost\stage\lib\x86\libboost_system-mt.a" />
+					<Add library="C:\Development\c++\boost\stage\lib\x86\libboost_filesystem-mt.a" />
+				</Linker>
+			</Target>
+			<Target title="Release-Linux-x86_64">
+				<Option platforms="Unix;" />
+				<Option output="Android-Usb-Linux-x86_64" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output=".objs/linux-x86_64" />
+				<Option type="5" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O2" />
+					<Add option="-w" />
+					<Add option="-DGAME_OS_LINUX" />
+					<Add directory="/usr/include/" />
+					<Add directory="/usr/include/x86_64-linux-gnu/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2/include/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2_image/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2_mixer/" />
+					<Add directory="/home/kevin/.codeblocks/boost/" />
+					<Add directory="/home/kevin/.codeblocks/raknet/" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="\home\kevin\.codeblocks\SDL2_image\.libs\libSDL2_image.a" />
+					<Add library="\home\kevin\.codeblocks\libpng\.libs\libpng.a" />
+					<Add library="\home\kevin\.codeblocks\zlib\libz.a" />
+					<Add library="\home\kevin\.codeblocks\SDL2_mixer\build\.libs\libSDL2_mixer.a" />
+					<Add library="\home\kevin\.codeblocks\libvorbis\lib\.libs\libvorbisfile.a" />
+					<Add library="\home\kevin\.codeblocks\libvorbis\lib\.libs\libvorbis.a" />
+					<Add library="\home\kevin\.codeblocks\libogg\src\.libs\libogg.a" />
+					<Add library="\home\kevin\.codeblocks\SDL2\build\.libs\libSDL2.a" />
+					<Add library="\usr\lib\libGL.so" />
+					<Add library="\usr\lib\libGLU.so" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_system.a" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_filesystem.a" />
+					<Add library="\home\kevin\.codeblocks\raknet\raknet\Lib\LibStatic\Lib\libRakNetLibStatic.a" />
+				</Linker>
+			</Target>
+			<Target title="Release-Linux-x86">
+				<Option platforms="Unix;" />
+				<Option output="Android-Usb-Linux-x86" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output=".objs/linux-x86" />
+				<Option type="5" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O2" />
+					<Add option="-w" />
+					<Add option="-DGAME_OS_LINUX" />
+					<Add directory="/usr/include/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2/include/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2_image/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2_mixer/" />
+					<Add directory="/home/kevin/.codeblocks/boost/" />
+					<Add directory="/home/kevin/.codeblocks/raknet/" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="\home\kevin\.codeblocks\SDL2_image\.libs\libSDL2_image.a" />
+					<Add library="\home\kevin\.codeblocks\libpng\.libs\libpng.a" />
+					<Add library="\home\kevin\.codeblocks\zlib\libz.a" />
+					<Add library="\home\kevin\.codeblocks\SDL2_mixer\build\.libs\libSDL2_mixer.a" />
+					<Add library="\home\kevin\.codeblocks\libvorbis\lib\.libs\libvorbisfile.a" />
+					<Add library="\home\kevin\.codeblocks\libvorbis\lib\.libs\libvorbis.a" />
+					<Add library="\home\kevin\.codeblocks\libogg\src\.libs\libogg.a" />
+					<Add library="\home\kevin\.codeblocks\SDL2\build\.libs\libSDL2.a" />
+					<Add library="\usr\lib\libGL.so" />
+					<Add library="\usr\lib\libGLU.so" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_system.a" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_filesystem.a" />
+					<Add library="\home\kevin\.codeblocks\raknet\raknet\Lib\LibStatic\Lib\libRakNetLibStatic.a" />
+				</Linker>
+			</Target>
+			<Target title="Release-OSX-x86_64">
+				<Option platforms="Mac;" />
+				<Option output="Android-Usb-OSX-x86_64" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output=".objs/osx-x86_64" />
+				<Option type="5" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O2" />
+					<Add option="-w" />
+					<Add option="-DGAME_OS_OSX" />
+					<Add directory="/usr/include/" />
+					<Add directory="/home/kevin/.codeblocks/boost/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2/include/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2_image/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2_mixer/" />
+					<Add directory="/home/kevin/.codeblocks/raknet/" />
+				</Compiler>
+				<Linker>
+					<Add option="-arch x86_64" />
+					<Add option="-mmacosx-version-min=10.7" />
+					<Add option="-stdlib=libc++" />
+					<Add option="-framework CoreFoundation" />
+					<Add option="-framework ApplicationServices" />
+					<Add option="-framework IOKit" />
+					<Add option="-framework AppKit" />
+					<Add option="-framework Carbon" />
+					<Add option="-framework ForceFeedback" />
+					<Add option="-framework CoreAudio" />
+					<Add option="-framework AudioUnit" />
+					<Add option="-framework AudioToolbox" />
+					<Add option="-framework OpenGL" />
+					<Add library="\home\kevin\.codeblocks\SDL2_mixer\build\.libs\libSDL2_mixer.a" />
+					<Add library="\home\kevin\.codeblocks\libvorbis\lib\.libs\libvorbis.a" />
+					<Add library="\home\kevin\.codeblocks\libvorbis\lib\.libs\libvorbisfile.a" />
+					<Add library="\home\kevin\.codeblocks\libogg\src\.libs\libogg.a" />
+					<Add library="\home\kevin\.codeblocks\SDL2_image\.libs\libSDL2_image.a" />
+					<Add library="\home\kevin\.codeblocks\libpng\.libs\libpng.a" />
+					<Add library="\home\kevin\.codeblocks\zlib\libz.a" />
+					<Add library="\home\kevin\.codeblocks\SDL2\build\.libs\libSDL2.a" />
+					<Add library="\home\kevin\.codeblocks\raknet\raknet\Lib\LibStatic\Lib\libRakNetLibStatic.a" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_filesystem.a" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_system.a" />
+					<Add library="\usr\lib\libiconv.2.dylib" />
+				</Linker>
+			</Target>
+			<Target title="Debug-Windows-x86_64">
+				<Option platforms="Windows;" />
+				<Option output="Android-Usb-Windows-Debug-x86_64.exe" prefix_auto="1" extension_auto="0" />
+				<Option object_output=".objs/windows-debug-x86_64" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-ggdb" />
+					<Add option="-fno-inline" />
+					<Add option="-fno-omit-frame-pointer" />
+					<Add option="-DGAME_OS_WINDOWS" />
+					<Add directory="C:/Development/c++/SDL2/x86_64/include/SDL2" />
+					<Add directory="C:/Development/c++/SDL2_image/x86_64/include/SDL2" />
+					<Add directory="C:/Development/c++/SDL2_mixer/x86_64/include/SDL2" />
+					<Add directory="C:/Development/c++/boost" />
+					<Add directory="C:/Development/c++/raknet" />
+				</Compiler>
+				<Linker>
+					<Add option="-lmingw32" />
+					<Add option="-Wl,--stack=67108864" />
+					<Add option="-lws2_32" />
+					<Add option="-lwinmm" />
+					<Add library="C:\Development\c++\SDL2_image\x86_64\lib\libSDL2_image.dll.a" />
+					<Add library="C:\Development\c++\SDL2_mixer\x86_64\lib\libSDL2_mixer.dll.a" />
+					<Add library="C:\Development\c++\SDL2\x86_64\lib\libSDL2main.a" />
+					<Add library="C:\Development\c++\SDL2\x86_64\lib\libSDL2.dll.a" />
+					<Add library="C:\Development\c++\raknet\raknet\Lib\DLL\Lib\x86_64\libRakNet.a" />
+					<Add library="C:\Development\c++\boost\stage\lib\x86_64\libboost_system-mt.a" />
+					<Add library="C:\Development\c++\boost\stage\lib\x86_64\libboost_filesystem-mt.a" />
+				</Linker>
+			</Target>
+			<Target title="Debug-Linux-x86_64">
+				<Option platforms="Unix;" />
+				<Option output="Android-Usb-Linux-Debug-x86_64" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output=".objs/linux-debug-x86_64" />
+				<Option type="5" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-DGAME_OS_LINUX" />
+					<Add directory="/usr/include/" />
+					<Add directory="/usr/include/x86_64-linux-gnu/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2/include/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2_image/" />
+					<Add directory="/home/kevin/.codeblocks/SDL2_mixer/" />
+					<Add directory="/home/kevin/.codeblocks/boost/" />
+					<Add directory="/home/kevin/.codeblocks/raknet/" />
+				</Compiler>
+				<Linker>
+					<Add library="\home\kevin\.codeblocks\SDL2_image\.libs\libSDL2_image.a" />
+					<Add library="\home\kevin\.codeblocks\libpng\.libs\libpng.a" />
+					<Add library="\home\kevin\.codeblocks\zlib\libz.a" />
+					<Add library="\home\kevin\.codeblocks\SDL2_mixer\build\.libs\libSDL2_mixer.a" />
+					<Add library="\home\kevin\.codeblocks\libvorbis\lib\.libs\libvorbisfile.a" />
+					<Add library="\home\kevin\.codeblocks\libvorbis\lib\.libs\libvorbis.a" />
+					<Add library="\home\kevin\.codeblocks\libogg\src\.libs\libogg.a" />
+					<Add library="\home\kevin\.codeblocks\SDL2\build\.libs\libSDL2.a" />
+					<Add library="\usr\lib\libGL.so" />
+					<Add library="\usr\lib\libGLU.so" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_system.a" />
+					<Add library="\home\kevin\.codeblocks\boost\stage\lib\libboost_filesystem.a" />
+					<Add library="\home\kevin\.codeblocks\raknet\raknet\Lib\LibStatic\Lib\libRakNetLibStatic.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="animation.cpp" />
+		<Unit filename="animation.h" />
+		<Unit filename="button.cpp" />
+		<Unit filename="button.h" />
+		<Unit filename="button_events.cpp" />
+		<Unit filename="button_events.h" />
+		<Unit filename="collision.cpp" />
+		<Unit filename="collision.h" />
+		<Unit filename="color.cpp" />
+		<Unit filename="color.h" />
+		<Unit filename="color_theme.cpp" />
+		<Unit filename="color_theme.h" />
+		<Unit filename="console.cpp" />
+		<Unit filename="console.h" />
+		<Unit filename="console_commands.cpp" />
+		<Unit filename="coords.cpp" />
+		<Unit filename="coords.h" />
+		<Unit filename="cursor.cpp" />
+		<Unit filename="cursor.h" />
+		<Unit filename="dev_info.cpp" />
+		<Unit filename="engine_interface.cpp" />
+		<Unit filename="engine_interface.h" />
+		<Unit filename="engine_interface_game.cpp" />
+		<Unit filename="engine_interface_options.cpp" />
+		<Unit filename="file_data.cpp" />
+		<Unit filename="file_data.h" />
+		<Unit filename="file_io.cpp" />
+		<Unit filename="file_io.h" />
+		<Unit filename="font.cpp" />
+		<Unit filename="font.h" />
+		<Unit filename="game.cpp" />
+		<Unit filename="game.h" />
+		<Unit filename="game.rc">
+			<Option compilerVar="WINDRES" />
+			<Option target="Release-Windows-x86_64" />
+			<Option target="Release-Linux-x86_64" />
+			<Option target="Release-Linux-x86" />
+			<Option target="Release-OSX-x86_64" />
+			<Option target="Debug-Windows-x86_64" />
+			<Option target="Debug-Linux-x86_64" />
+		</Unit>
+		<Unit filename="game_command.cpp" />
+		<Unit filename="game_command.h" />
+		<Unit filename="game_constants.cpp" />
+		<Unit filename="game_constants.h" />
+		<Unit filename="game_input.cpp" />
+		<Unit filename="game_option.cpp" />
+		<Unit filename="game_option.h" />
+		<Unit filename="game_window.cpp" />
+		<Unit filename="game_window.h" />
+		<Unit filename="game_world.cpp" />
+		<Unit filename="game_world.h" />
+		<Unit filename="image.cpp" />
+		<Unit filename="image.h" />
+		<Unit filename="image_data.cpp" />
+		<Unit filename="image_data.h" />
+		<Unit filename="information.cpp" />
+		<Unit filename="information.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="main.h" />
+		<Unit filename="math.cpp" />
+		<Unit filename="math.h" />
+		<Unit filename="message_log.cpp" />
+		<Unit filename="message_log.h" />
+		<Unit filename="music.cpp" />
+		<Unit filename="music.h" />
+		<Unit filename="network.cpp" />
+		<Unit filename="network.h" />
+		<Unit filename="network_client.cpp" />
+		<Unit filename="network_game.cpp" />
+		<Unit filename="network_server.cpp" />
+		<Unit filename="pixels.cpp" />
+		<Unit filename="pixels.h" />
+		<Unit filename="render.cpp" />
+		<Unit filename="render.h" />
+		<Unit filename="rng.cpp" />
+		<Unit filename="rng.h" />
+		<Unit filename="rtt_data.cpp" />
+		<Unit filename="rtt_data.h" />
+		<Unit filename="rtt_manager.cpp" />
+		<Unit filename="rtt_manager.h" />
+		<Unit filename="screen_shake.cpp" />
+		<Unit filename="screen_shake.h" />
+		<Unit filename="server.cpp" />
+		<Unit filename="server.h" />
+		<Unit filename="sorting.cpp" />
+		<Unit filename="sorting.h" />
+		<Unit filename="sound.cpp" />
+		<Unit filename="sound.h" />
+		<Unit filename="sound_data.cpp" />
+		<Unit filename="sound_data.h" />
+		<Unit filename="special_info.cpp" />
+		<Unit filename="special_info.h" />
+		<Unit filename="sprite.cpp" />
+		<Unit filename="sprite.h" />
+		<Unit filename="string_stuff.cpp" />
+		<Unit filename="string_stuff.h" />
+		<Unit filename="timer.cpp" />
+		<Unit filename="timer.h" />
+		<Unit filename="toast.cpp" />
+		<Unit filename="toast.h" />
+		<Unit filename="tooltip.cpp" />
+		<Unit filename="tooltip.h" />
+		<Unit filename="touch_controller.cpp" />
+		<Unit filename="touch_controller.h" />
+		<Unit filename="update.cpp" />
+		<Unit filename="update.h" />
+		<Unit filename="vector.cpp" />
+		<Unit filename="vector.h" />
+		<Unit filename="version.h" />
+		<Unit filename="window.cpp" />
+		<Unit filename="window.h" />
+		<Unit filename="window_close_function.cpp" />
+		<Unit filename="window_scrolling_buttons.cpp" />
+		<Unit filename="world.cpp" />
+		<Unit filename="world.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

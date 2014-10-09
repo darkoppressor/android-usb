@@ -1,0 +1,46 @@
+#!/bin/sh
+
+FindPath()
+{
+    dirname "$(readlink -e $(which $1))"
+}
+
+if [ "${CHEESIE_GAME_NAME}" = "" ]; then
+    CHEESIE_GAME_NAME="Android-Usb"
+fi
+
+if [ "${CHEESIE_DATA_PATH}" = "" ]; then
+    CHEESIE_DATA_PATH="`FindPath $0`"
+fi
+
+echo "${CHEESIE_GAME_NAME}: Installed in '$CHEESIE_DATA_PATH'."
+cd "$CHEESIE_DATA_PATH"
+
+if [ "${CHEESIE_UNAME}" = "" ]; then
+    CHEESIE_UNAME=`uname`
+fi
+
+if [ "${CHEESIE_ARCH}" = "" ]; then
+    CHEESIE_ARCH=`uname -m`
+fi
+
+if [ "${CHEESIE_UNAME}" = "Linux" ]; then
+	if [ "${CHEESIE_ARCH}" = "x86_64" ]; then
+	    echo "${CHEESIE_GAME_NAME}: Using GNU/Linux x86_64 version."
+	    export LD_LIBRARY_PATH=./linux-x86_64:$LD_LIBRARY_PATH
+	    exec ./"${CHEESIE_GAME_NAME}"-Linux-x86_64 "$@"
+	else
+	    echo "${CHEESIE_GAME_NAME}: Using GNU/Linux x86 version."
+	    export LD_LIBRARY_PATH=./linux-x86:$LD_LIBRARY_PATH
+	    exec ./"${CHEESIE_GAME_NAME}"-Linux-x86 "$@"
+	fi
+elif [ "${CHEESIE_UNAME}" = "Darwin" ]; then
+	if [ "${CHEESIE_ARCH}" = "x86_64" ]; then
+	    echo "${CHEESIE_GAME_NAME}: Using OS X x86_64 version."
+	    export DYLD_LIBRARY_PATH=./osx-x86_64:$DYLD_LIBRARY_PATH
+	    exec ./"${CHEESIE_GAME_NAME}"-OSX-x86_64 "$@"
+	else
+	    echo "${CHEESIE_GAME_NAME}: Error: ${CHEESIE_ARCH} is not a supported architecture."
+	fi
+fi
+

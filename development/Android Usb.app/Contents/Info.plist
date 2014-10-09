@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- BEGIN GAME-SPECIFIC -->
+
+	<key>CFBundleName</key>
+	<string>Android Usb</string>
+
+	<key>CFBundleDisplayName</key>
+	<string>Android Usb</string>
+
+	<key>CFBundleIdentifier</key>
+	<string>org.cheeseandbacon.android-usb</string>
+
+	<key>CFBundleVersion</key>
+	<string>0.0.1</string>
+
+	<key>CFBundleShortVersionString</key>
+	<string>0.0.1</string>
+	
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.data</string>
+			</array>
+		</dict>
+	</array>
+
+	<!-- END GAME-SPECIFIC -->
+
+	<key>CFBundleExecutable</key>
+	<string>game</string>
+
+	<key>CFBundleIconFile</key>
+	<string>icon.icns</string>
+
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+
+	<key>CFBundleSignature</key>
+	<string>????</string>
+
+	<key>LSMinimumSystemVersion</key>
+	<string>10.7</string>
+</dict>
+</plist>
+
+

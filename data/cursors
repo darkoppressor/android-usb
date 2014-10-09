@@ -1,0 +1,9 @@
+<cursor>
+	name:standard
+	sprite:cursor_standard
+</cursor>
+
+<cursor>
+	name:mouse_over
+	sprite:cursor_mouse_over
+</cursor>
