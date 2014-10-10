@@ -68,7 +68,6 @@ void Window::build_scrolling_buttons(){
         }
         else if(scrolling_buttons=="browser"){
             game.world.files=game.world.get_directory_list(game.world.current_path,true);
-            game.world.selected_files.clear();
 
             for(int i=0;i<game.world.files.size();i++){
                 buttons.push_back(Button());
@@ -79,11 +78,13 @@ void Window::build_scrolling_buttons(){
                 buttons[buttons.size()-1].text=game.world.files[i];
                 buttons[buttons.size()-1].font="standard";
                 buttons[buttons.size()-1].event_function="browser_cd_"+game.world.files[i];
-                buttons[buttons.size()-1].alt_function1="browser_pull_"+game.world.files[i];
-                buttons[buttons.size()-1].alt_function2="browser_select_"+string_stuff.num_to_string(i);
-                buttons[buttons.size()-1].alt_function3="browser_rm_"+game.world.files[i];
+                if(game.world.files[i]!=".."){
+                    buttons[buttons.size()-1].alt_function1="browser_select_"+game.world.get_current_path()+game.world.files[i];
+                }
                 buttons[buttons.size()-1].set_dimensions();
             }
+
+            game.world.update_selected_buttons();
         }
         else{
             message_log.add_error("Invalid scrolling buttons list: '"+scrolling_buttons+"'");

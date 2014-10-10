@@ -9,12 +9,42 @@
 </game_command>
 
 <game_command>
+	name:toggle_hidden_files
+	title:Show/Hide Hidden Files
+	description:Toggle the display of hidden files and directories
+	developer:false
+	key:H
+	controller_button:leftstick
+	controller_axis:
+</game_command>
+
+<game_command>
+	name:refresh
+	title:Refresh
+	description:Refresh the file list
+	developer:false
+	key:F5
+	controller_button:rightstick
+	controller_axis:
+</game_command>
+
+<game_command>
+	name:up
+	title:Up
+	description:Move up a directory
+	developer:false
+	key:Backspace
+	controller_button:
+	controller_axis:
+</game_command>
+
+<game_command>
 	name:select_all
 	title:Select All
 	description:Select all files/directories in the current directory (must hold Control)
 	developer:false
 	key:A
-	controller_button:
+	controller_button:rightshoulder
 	controller_axis:
 </game_command>
 
@@ -24,7 +54,7 @@
 	description:Copy all currently selected files to the computer (must hold Control)
 	developer:false
 	key:C
-	controller_button:
+	controller_button:x
 	controller_axis:
 </game_command>
 
@@ -34,6 +64,6 @@
 	description:Delete all currently selected files
 	developer:false
 	key:Delete
-	controller_button:
+	controller_button:y
 	controller_axis:
 </game_command>

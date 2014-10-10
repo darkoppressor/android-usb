@@ -154,22 +154,16 @@ bool Button_Events::handle_button_event(string button_event,Window* parent_windo
 
             game.world.change_directory(button_event);
         }
-        else if(boost::algorithm::starts_with(button_event,"browser_pull_")){
-            boost::algorithm::erase_first(button_event,"browser_pull_");
-
-            game.world.adb_pull(button_event);
-        }
         else if(boost::algorithm::starts_with(button_event,"browser_select_")){
             boost::algorithm::erase_first(button_event,"browser_select_");
 
-            game.world.select_file(string_stuff.string_to_unsigned_long(button_event));
+            game.world.select_file(button_event);
         }
-        else if(boost::algorithm::starts_with(button_event,"browser_rm_")){
-            boost::algorithm::erase_first(button_event,"browser_rm_");
 
-            game.world.remove_file(button_event);
+        else if(button_event=="confirm_delete_selected"){
+            game.world.delete_selected();
 
-            parent_window->rebuild_scrolling_buttons();
+            engine_interface.get_window("confirm_delete_selected")->toggle_on(true,false);
         }
 
         else{

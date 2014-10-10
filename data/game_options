@@ -11,6 +11,12 @@
 </game_option>
 
 <game_option>
+	name:cl_hidden_files
+	default:false
+	description:Show hidden files and directories.
+</game_option>
+
+<game_option>
 	name:cl_effect_limit
 	default:8192
 	description:The maximum number of simultaneous effects.

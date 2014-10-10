@@ -15,6 +15,9 @@ string Game_Option::get_value(){
     else if(name=="cl_starting_path"){
         return game.option_starting_path;
     }
+    else if(name=="cl_hidden_files"){
+        return string_stuff.bool_to_string(game.option_hidden_files);
+    }
     else if(name=="cl_effect_limit"){
         return string_stuff.num_to_string(game.option_effect_limit);
     }
@@ -85,6 +88,9 @@ void Game_Option::set_value(string new_value){
     }
     else if(name=="cl_starting_path"){
         game.option_starting_path=new_value;
+    }
+    else if(name=="cl_hidden_files"){
+        game.option_hidden_files=string_stuff.string_to_bool(new_value);
     }
     else if(name=="cl_effect_limit"){
         game.option_effect_limit=string_stuff.string_to_unsigned_long(new_value);

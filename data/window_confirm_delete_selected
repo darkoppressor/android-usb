@@ -1,0 +1,29 @@
+<window>
+	name:confirm_delete_selected
+	starting_position:-1,-1
+	width:1280
+	height:151
+	close_function:confirm_delete_selected
+	
+	<info>
+		location:2,36
+		special_text:confirm_delete_selected
+	</info>
+	
+	<info>
+		location:2,80
+	</info>
+	
+	<button>
+		location:600,124
+		text:Yes
+		event:confirm_delete_selected
+	</button>
+	
+	<button>
+		location:650,124
+		text:No
+		event:close_window
+	</button>
+	
+</window>

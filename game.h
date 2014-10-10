@@ -21,6 +21,7 @@ public:
     bool option_screen_shake;
     std::string option_adb_path;
     std::string option_starting_path;
+    bool option_hidden_files;
 
     bool display_scoreboard;
 

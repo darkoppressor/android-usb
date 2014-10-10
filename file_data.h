@@ -4,14 +4,13 @@
 class File_Data{
 public:
 
-    bool is_directory;
-    bool have_permission;
     bool exists;
+    bool is_readable;
+    bool is_symbolic_link;
+    bool is_directory;
+    bool is_regular_file;
 
     File_Data();
-
-    bool is_good_directory();
-    bool is_good_file();
 };
 
 #endif

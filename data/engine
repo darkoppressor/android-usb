@@ -10,7 +10,7 @@
 	logic_update_rate:60.0
 	frame_rate_max:200.0
 	axis_scroll_rate:5
-	scrolling_buttons_offset:60
+	scrolling_buttons_offset:84
 	cursor_width:2
 	cursor_height:2
 	console_height:16

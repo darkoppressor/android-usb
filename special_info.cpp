@@ -59,6 +59,26 @@ string Special_Info::get_special_info_text(string special_info){
         else if(special_info=="browser_current_path"){
             text=game.world.current_path;
         }
+        else if(special_info=="browser_selected_files"){
+            if(game.world.selected_files.size()>0){
+                text=string_stuff.num_to_string(game.world.selected_files.size())+" file";
+
+                if(game.world.selected_files.size()>1){
+                    text+="s";
+                }
+
+                text+=" selected";
+            }
+        }
+        else if(special_info=="confirm_delete_selected"){
+            text="Are you sure you want to delete ";
+            if(game.world.selected_files.size()==1){
+                text+="this file?";
+            }
+            else{
+                text+="these "+string_stuff.num_to_string(game.world.selected_files.size())+" files?";
+            }
+        }
         else{
             message_log.add_error("Invalid special info text: '"+special_info+"'");
         }

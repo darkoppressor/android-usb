@@ -1,0 +1,5 @@
+Add moving files on device
+Add copying files on device
+Add renaming files on device
+
+Update help again?

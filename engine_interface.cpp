@@ -3345,6 +3345,11 @@ void Engine_Interface::gui_nav_toggle_menu_android(){
 void Engine_Interface::gui_nav_back_controller(){
     set_gui_mode("controller");
 
+    //I've added this for the file browser
+    if(open_window_count()==1){
+        game.world.change_directory("..");
+    }
+
     if(mutable_info_selected()){
         clear_mutable_info();
     }
@@ -3356,7 +3361,10 @@ void Engine_Interface::gui_nav_back_controller(){
 void Engine_Interface::gui_nav_toggle_menu_controller(){
     set_gui_mode("controller");
 
-    string window_name="main_menu";
+    //I've overridden the usual behavior here because there should be no main menu
+    quit();
+
+    /**string window_name="main_menu";
     if(game.in_progress){
         window_name="ingame_menu";
     }
@@ -3368,7 +3376,7 @@ void Engine_Interface::gui_nav_toggle_menu_controller(){
     }
     else{
         window->toggle_on();
-    }
+    }*/
 }
 
 void Engine_Interface::gui_nav_back_keyboard_and_mouse(){
@@ -4061,7 +4069,8 @@ bool Engine_Interface::handle_input_events(bool event_ignore_command_set){
 
                 if(event.key.repeat==0){
                     //Screenshot
-                    if(!event_consumed && event.key.keysym.scancode==SDL_SCANCODE_F5){
+                    //I've changed this just for this program, because I really want F5 for refreshing the browser.
+                    if(!event_consumed && event.key.keysym.scancode==SDL_SCANCODE_F12){
                         main_window.screenshot();
 
                         event_consumed=true;

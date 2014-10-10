@@ -23,12 +23,21 @@ void Game_World::generate_world(){
         engine_interface.quit();
     }
 
+    ///Maybe I should add something around here to help with initially connecting to the device in adb
+    ///What if multiple devices are connected?
+
     run_command(game.option_adb_path+" start-server");
 
     starting_path=run_command(game.option_adb_path+" shell echo "+game.option_starting_path);
     boost::algorithm::trim(starting_path);
 
-    current_path=starting_path;
+    if(starting_path.length()>0 && starting_path[0]=='/'){
+        starting_path.erase(starting_path.begin());
+    }
+
+    current_path="/";
+
+    change_directory(starting_path,false);
 }
 
 string Game_World::get_current_path(){
@@ -38,6 +47,41 @@ string Game_World::get_current_path(){
     else{
         return current_path+"/";
     }
+}
+
+string Game_World::path_to_filename(string path){
+    boost::algorithm::trim(path);
+
+    for(int i=0;i<path.size();i++){
+        if(path[i]=='/'){
+            path.erase(0,i+1);
+            i=0;
+        }
+    }
+
+    return path;
+}
+
+string Game_World::directory_up(string path){
+    boost::algorithm::trim(path);
+
+    for(int i=path.size()-1;i>0;i--){
+        bool slash=false;
+        if(path[i]=='/'){
+            slash=true;
+        }
+
+        path.erase(path.begin()+i);
+        if(i<path.size()){
+            i++;
+        }
+
+        if(slash){
+            break;
+        }
+    }
+
+    return path;
 }
 
 string Game_World::run_command(string command){
@@ -60,140 +104,183 @@ string Game_World::run_command(string command){
     return result;
 }
 
-File_Data Game_World::check_file(string path,bool need_directory){
+File_Data Game_World::check_file(string path){
     File_Data file_data;
 
     boost::algorithm::trim(path);
 
-    for(int i=0;i<2;i++){
-        string error_check="";
+    if(boost::algorithm::contains(run_command(game.option_adb_path+" shell if [ -e \""+path+"\" ]; then echo \"yeppers!\"; fi"),"yeppers!")){
+        file_data.exists=true;
 
-        if(i==0){
-            error_check=run_command(game.option_adb_path+" shell cd \""+path+"\"");
-        }
-        else if(i==1){
-            error_check=run_command(game.option_adb_path+" shell ls \""+path+"\"");
-        }
+        if(boost::algorithm::contains(run_command(game.option_adb_path+" shell if [ -r \""+path+"\" ]; then echo \"yeppers!\"; fi"),"yeppers!")){
+            file_data.is_readable=true;
 
-        ///Does this need checking for non-regular files?
-        ///Here is the error message if so:
-        ///message_log.add_error("'"+get_current_path()+cd+file+"' is not a valid directory or file");
+            if(boost::algorithm::contains(run_command(game.option_adb_path+" shell if [ -h \""+path+"\" ]; then echo \"yeppers!\"; fi"),"yeppers!")){
+                file_data.is_symbolic_link=true;
+            }
 
-        if(boost::algorithm::icontains(error_check,"no such file or directory")){
-            file_data.exists=false;
-        }
-        else{
-            file_data.exists=true;
-        }
+            if(boost::algorithm::contains(run_command(game.option_adb_path+" shell if [ -d \""+path+"\" ]; then echo \"yeppers!\"; fi"),"yeppers!")){
+                file_data.is_directory=true;
+            }
 
-        if(boost::algorithm::icontains(error_check,"not a directory")){
-            file_data.is_directory=false;
+            if(boost::algorithm::contains(run_command(game.option_adb_path+" shell if [ -f \""+path+"\" ]; then echo \"yeppers!\"; fi"),"yeppers!")){
+                file_data.is_regular_file=true;
+            }
         }
         else{
-            file_data.is_directory=true;
-        }
-
-        if(boost::algorithm::icontains(error_check,"permission denied")){
-            file_data.have_permission=false;
-        }
-        else{
-            file_data.have_permission=true;
+            message_log.add_log("'"+path+"' is not readable (permission denied)");
         }
     }
-
-    if(!file_data.exists){
-        message_log.add_log("'"+path+"': No such file or directory");
-    }
-
-    if(!file_data.have_permission){
-        message_log.add_log("Permission denied for '"+path+"'");
-    }
-
-    if(need_directory && !file_data.is_directory){
-        message_log.add_log("'"+path+"' is not a directory");
+    else{
+        message_log.add_log("'"+path+"' does not exist");
     }
 
     return file_data;
 }
 
-void Game_World::change_directory(string directory){
+void Game_World::change_directory(string directory,bool rebuild){
     boost::algorithm::trim(directory);
 
-    File_Data file_data=check_file(get_current_path()+directory,true);
+    if(directory.length()>0){
+        string path=get_current_path()+directory;
 
-    if(file_data.is_good_directory()){
-        current_path=run_command(game.option_adb_path+" shell readlink -f \""+get_current_path()+directory+"\"");
+        File_Data file_data=check_file(path);
 
-        boost::algorithm::trim(current_path);
+        if(file_data.exists && file_data.is_readable){
+            if(file_data.is_directory){
+                current_path=run_command(game.option_adb_path+" shell readlink -f \""+path+"\"");
 
-        engine_interface.get_window("browser")->rebuild_scrolling_buttons();
+                boost::algorithm::trim(current_path);
+
+                if(rebuild){
+                    engine_interface.get_window("browser")->rebuild_scrolling_buttons();
+                }
+            }
+            else{
+                message_log.add_log("'"+path+"' is not a directory");
+            }
+        }
     }
 }
 
-void Game_World::remove_file(string file){
-    boost::algorithm::trim(file);
+bool Game_World::remove_file(string path){
+    boost::algorithm::trim(path);
 
-    File_Data file_data=check_file(get_current_path()+file);
+    string file=path_to_filename(path);
 
-    if(file_data.is_good_file() || file_data.is_good_directory()){
-        run_command(game.option_adb_path+" shell rm -rf \""+get_current_path()+file+"\"");
+    if(path.length()>0 && file!="." && file!=".."){
+        File_Data file_data=check_file(path);
 
-        message_log.add_log("Removing '"+get_current_path()+file+"'");
+        if(file_data.exists && file_data.is_readable){
+            if(file_data.is_regular_file || file_data.is_directory){
+                run_command(game.option_adb_path+" shell rm -rf \""+path+"\"");
+
+                message_log.add_log("Removing '"+path+"'");
+
+                return true;
+            }
+            else{
+                message_log.add_log("'"+path+"' is not a valid file or directory");
+            }
+        }
     }
+
+    return false;
 }
 
-void Game_World::select_file(unsigned int index,bool only_select){
+bool Game_World::is_selected(string path){
+    boost::algorithm::trim(path);
+
+    for(int i=0;i<selected_files.size();i++){
+        if(selected_files[i]==path){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void Game_World::update_selected_buttons(){
     Window* window=engine_interface.get_window("browser");
-    if(index>0 && index<window->buttons.size()){
+
+    for(int i=0;i<window->buttons.size();i++){
+        boost::algorithm::erase_first(window->buttons[i].text,"** ");
+        boost::algorithm::erase_first(window->buttons[i].text," **");
+
+        if(is_selected(get_current_path()+window->buttons[i].text)){
+            window->buttons[i].text="** "+window->buttons[i].text+" **";
+        }
+    }
+}
+
+void Game_World::select_file(string path,bool only_select){
+    boost::algorithm::trim(path);
+
+    string file=path_to_filename(path);
+
+    if(path.length()>0 && file!="." && file!=".."){
         bool selected=false;
         for(int i=0;i<selected_files.size();i++){
-            if(selected_files[i]==index){
+            if(selected_files[i]==path){
                 selected=true;
                 break;
             }
         }
 
         if(!selected){
-            selected_files.push_back(index);
+            selected_files.push_back(path);
 
-            window->buttons[index].text="** "+window->buttons[index].text+" **";
+            update_selected_buttons();
         }
         else if(!only_select){
             for(int i=0;i<selected_files.size();i++){
-                if(selected_files[i]==index){
+                if(selected_files[i]==path){
                     selected_files.erase(selected_files.begin()+i);
                     i--;
                 }
             }
 
-            boost::algorithm::erase_first(window->buttons[index].text,"** ");
-            boost::algorithm::erase_first(window->buttons[index].text," **");
+            update_selected_buttons();
         }
     }
 }
 
 void Game_World::select_all(){
     for(int i=0;i<files.size();i++){
-        select_file(i,true);
+        select_file(get_current_path()+files[i],true);
     }
 }
 
 void Game_World::copy_selected(){
     for(int i=0;i<selected_files.size();i++){
-        if(selected_files[i]>0 && selected_files[i]<files.size()){
-            adb_pull(files[selected_files[i]]);
-        }
+        string file=path_to_filename(selected_files[i]);
+        string path=selected_files[i];
+        path.erase(path.size()-file.size(),file.size());
+
+        adb_pull(path,file);
     }
+
+    selected_files.clear();
+    update_selected_buttons();
 }
 
 void Game_World::delete_selected(){
+    bool some_file_removed=false;
+
     for(int i=0;i<selected_files.size();i++){
-        if(selected_files[i]>0 && selected_files[i]<files.size()){
-            remove_file(files[selected_files[i]]);
+        if(remove_file(selected_files[i])){
+            some_file_removed=true;
         }
     }
 
-    engine_interface.get_window("browser")->rebuild_scrolling_buttons();
+    selected_files.clear();
+
+    if(some_file_removed){
+        engine_interface.get_window("browser")->rebuild_scrolling_buttons();
+    }
+    else{
+        update_selected_buttons();
+    }
 }
 
 void Game_World::adb_push(string path,string cd){
@@ -205,7 +292,7 @@ void Game_World::adb_push(string path,string cd){
 
         run_command(game.option_adb_path+" shell mkdir \""+get_current_path()+cd+file_name+"\"");
 
-        message_log.add_log("Copying '"+path+"' to '"+get_current_path()+cd+"'");
+        message_log.add_log("Pushing '"+path+"' to '"+get_current_path()+cd+"'");
 
         string new_cd=cd+file_name+"/";
 
@@ -216,35 +303,41 @@ void Game_World::adb_push(string path,string cd){
     else if(file_io.is_regular_file(path)){
         run_command(game.option_adb_path+" push \""+path+"\" \""+get_current_path()+cd+"\"");
 
-        message_log.add_log("Copying '"+path+"' to '"+get_current_path()+cd+"'");
+        message_log.add_log("Pushing '"+path+"' to '"+get_current_path()+cd+"'");
     }
     else{
         message_log.add_error("'"+path+"' is not a valid directory or file");
     }
 }
 
-void Game_World::adb_pull(string file,string cd){
+void Game_World::adb_pull(string starting_path,string file,string cd){
+    boost::algorithm::trim(starting_path);
     boost::algorithm::trim(file);
-    boost::algorithm::trim(cd);
 
-    File_Data file_data=check_file(get_current_path()+cd+file);
+    if(starting_path.length()>0 && file.length()>0 && file!="." && file!=".."){
+        string path=starting_path+cd+file;
 
-    if(file_data.is_good_file()){
-        run_command(game.option_adb_path+" pull \""+get_current_path()+cd+file+"\" "+engine_interface.get_home_directory()+"files/"+cd+file);
+        File_Data file_data=check_file(path);
 
-        message_log.add_log("Copying '"+get_current_path()+cd+file+"' to '"+engine_interface.get_home_directory()+"files/"+cd+"'");
-    }
-    else if(file_data.is_good_directory()){
-        file_io.create_directory(engine_interface.get_home_directory()+"files/"+cd+file);
+        if(file_data.exists && file_data.is_readable){
+            if(file_data.is_directory){
+                file_io.create_directory(engine_interface.get_home_directory()+"files/"+cd+file);
 
-        message_log.add_log("Copying '"+get_current_path()+cd+file+"' to '"+engine_interface.get_home_directory()+"files/"+cd+"'");
+                message_log.add_log("Pulling '"+path+"' to '"+engine_interface.get_home_directory()+"files/"+cd+"'");
 
-        vector<string> file_list=get_directory_list(get_current_path()+cd+file,false);
+                vector<string> file_list=get_directory_list(path,false);
 
-        string new_cd=cd+file+"/";
+                string new_cd=cd+file+"/";
 
-        for(int i=0;i<file_list.size();i++){
-            adb_pull(file_list[i],new_cd);
+                for(int i=0;i<file_list.size();i++){
+                    adb_pull(starting_path,file_list[i],new_cd);
+                }
+            }
+            else if(file_data.is_regular_file){
+                run_command(game.option_adb_path+" pull \""+path+"\" \""+engine_interface.get_home_directory()+"files/"+cd+file+"\"");
+
+                message_log.add_log("Pulling '"+path+"' to '"+engine_interface.get_home_directory()+"files/"+cd+"'");
+            }
         }
     }
 }
@@ -252,31 +345,46 @@ void Game_World::adb_pull(string file,string cd){
 vector<string> Game_World::get_directory_list(string path,bool allow_parent_directory){
     vector<string> file_list;
 
-    string files_string=run_command(game.option_adb_path+" shell ls \""+path+"\"");
+    File_Data file_data=check_file(path);
 
-    file_list.push_back("");
-
-    for(int i=0;i<files_string.size();i++){
-        if(files_string[i]=='\n'){
-            file_list.push_back("");
+    if(file_data.exists && file_data.is_readable && file_data.is_directory){
+        string flags="";
+        if(game.option_hidden_files){
+            flags="-a";
         }
-        else{
-            file_list[file_list.size()-1]+=files_string[i];
+
+        string files_string=run_command(game.option_adb_path+" shell ls "+flags+" \""+path+"\"");
+
+        file_list.push_back("");
+
+        for(int i=0;i<files_string.size();i++){
+            if(files_string[i]=='\n'){
+                file_list.push_back("");
+            }
+            else{
+                file_list[file_list.size()-1]+=files_string[i];
+            }
         }
-    }
 
-    for(int i=0;i<file_list.size();i++){
-        if(file_list[i].length()==0 || file_list[i]=="." || file_list[i]==".."){
-            file_list.erase(file_list.begin()+i);
-            i--;
+        for(int i=0;i<file_list.size();i++){
+            if(file_list[i].length()==0 || file_list[i]=="." || file_list[i]==".."){
+                file_list.erase(file_list.begin()+i);
+                i--;
+            }
         }
-    }
 
-    if(allow_parent_directory && path!="/"){
-        file_list.insert(file_list.begin(),"..");
-    }
+        if(allow_parent_directory && path!="/"){
+            file_list.insert(file_list.begin(),"..");
+        }
 
-    return file_list;
+        return file_list;
+    }
+    else{
+        message_log.add_log("Error reading '"+path+"', moving up a directory");
+
+        current_path=directory_up(path);
+        return get_directory_list(current_path,allow_parent_directory);
+    }
 }
 
 void Game_World::tick(){

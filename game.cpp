@@ -14,6 +14,7 @@ Game::Game(){
     option_screen_shake=false;
     option_adb_path="";
     option_starting_path="";
+    option_hidden_files=false;
 
     display_scoreboard=false;
 

@@ -2,6 +2,7 @@ syntax: regexp
 
 ^.objs/
 ^screenshots/
+^files/
 
 ^development/android/assets/
 ^development/android/jni/RakNet/
