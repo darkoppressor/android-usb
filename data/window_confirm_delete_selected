@@ -3,6 +3,7 @@
 	starting_position:-1,-1
 	width:1280
 	height:151
+	title:Confirm Deletion
 	close_function:confirm_delete_selected
 	
 	<info>

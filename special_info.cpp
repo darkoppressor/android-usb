@@ -70,6 +70,14 @@ string Special_Info::get_special_info_text(string special_info){
                 text+=" selected";
             }
         }
+        else if(special_info=="rename_file"){
+            if(game.world.selected_files.size()==1){
+                text=game.world.selected_files[0];
+            }
+        }
+        else if(special_info=="create_directory"){
+            text="Creating new directory in '"+game.world.get_current_path()+"':";
+        }
         else if(special_info=="confirm_delete_selected"){
             text="Are you sure you want to delete ";
             if(game.world.selected_files.size()==1){

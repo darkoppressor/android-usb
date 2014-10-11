@@ -1,5 +1,4 @@
-Add moving files on device
-Add copying files on device
-Add renaming files on device
+I might want to add a way to view the properties of selected stuff
 
-Update help again?
+If a file is hidden but showing, and you select it, and then you unshow hidden files, it remains selected.
+I've left this as-is for now, but it might be kind of weird. Maybe change this sometime?

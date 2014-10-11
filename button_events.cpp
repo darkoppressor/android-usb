@@ -160,6 +160,16 @@ bool Button_Events::handle_button_event(string button_event,Window* parent_windo
             game.world.select_file(button_event);
         }
 
+        else if(button_event=="rename_file"){
+            game.world.rename_file();
+
+            engine_interface.get_window("rename_file")->toggle_on(true,false);
+        }
+        else if(button_event=="create_directory"){
+            game.world.create_directory();
+
+            engine_interface.get_window("create_directory")->toggle_on(true,false);
+        }
         else if(button_event=="confirm_delete_selected"){
             game.world.delete_selected();
 

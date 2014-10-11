@@ -3217,6 +3217,7 @@ void Engine_Interface::handle_text_input(string text){
             if((ptr_mutable_info->allows_input("letters") && ((text[i]>='A' && text[i]<='Z') || (text[i]>='a' && text[i]<='z'))) ||
                (ptr_mutable_info->allows_input("numbers") && text[i]>='0' && text[i]<='9') ||
                (ptr_mutable_info->allows_input("symbols") && ((text[i]>='!' && text[i]<='/') || (text[i]>=':' && text[i]<='@') || (text[i]>='[' && text[i]<='`') || ((unsigned char)text[i]>='{'))) ||
+               (ptr_mutable_info->allows_input("symbols_posix") && (text[i]=='.' || text[i]=='_' || text[i]=='-')) ||
                (ptr_mutable_info->allows_input("space") && text[i]==' ')){
                 //Don't allow the console toggle key to be typed.
                 if(!(text[i]=='`' && (gui_mode=="mouse" || gui_mode=="keyboard") && !keystates[SDL_SCANCODE_LSHIFT] && !keystates[SDL_SCANCODE_RSHIFT])){

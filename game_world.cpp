@@ -184,6 +184,9 @@ bool Game_World::remove_file(string path){
             }
         }
     }
+    else{
+        message_log.add_log("Failed to remove '"+path+"' (invalid filename)");
+    }
 
     return false;
 }
@@ -243,11 +246,88 @@ void Game_World::select_file(string path,bool only_select){
             update_selected_buttons();
         }
     }
+    else{
+        message_log.add_log("Failed to select '"+path+"' (invalid filename)");
+    }
 }
 
 void Game_World::select_all(){
     for(int i=0;i<files.size();i++){
         select_file(get_current_path()+files[i],true);
+    }
+}
+
+void Game_World::deselect_all(){
+    selected_files.clear();
+
+    update_selected_buttons();
+}
+
+void Game_World::rename_file(){
+    bool file_renamed=false;
+
+    if(selected_files.size()==1){
+        string path=selected_files[0];
+        string filename=path_to_filename(path);
+
+        string path_to_parent=path;
+        path_to_parent.erase(path_to_parent.size()-filename.size(),filename.size());
+
+        string filename_new=engine_interface.get_window("rename_file")->get_info_text(0);
+
+        boost::algorithm::trim(path);
+        boost::algorithm::trim(path_to_parent);
+        boost::algorithm::trim(filename);
+        boost::algorithm::trim(filename_new);
+
+        if(filename_new.length()>0 && filename_new!="." && filename_new!=".."){
+            File_Data file_data=check_file(path);
+
+            if(file_data.exists && file_data.is_readable){
+                run_command(game.option_adb_path+" shell mv \""+path+"\" \""+path_to_parent+filename_new+"\"");
+
+                file_renamed=true;
+
+                message_log.add_log("Renaming '"+path+"' to '"+path_to_parent+filename_new+"'");
+            }
+        }
+        else{
+            message_log.add_log("Failed to rename '"+path+"' (invalid filename)");
+        }
+    }
+    else if(selected_files.size()==0){
+        message_log.add_log("Failed to rename file (no file selected)");
+    }
+    else{
+        message_log.add_log("Cannot rename multiple files at once");
+    }
+
+    selected_files.clear();
+
+    if(file_renamed){
+        engine_interface.get_window("browser")->rebuild_scrolling_buttons();
+    }
+    else{
+        update_selected_buttons();
+    }
+}
+
+void Game_World::create_directory(){
+    string path=get_current_path();
+    string directory=engine_interface.get_window("create_directory")->get_info_text(0);
+
+    boost::algorithm::trim(path);
+    boost::algorithm::trim(directory);
+
+    if(directory.length()>0 && directory!="." && directory!=".."){
+        run_command(game.option_adb_path+" shell mkdir \""+path+directory+"\"");
+
+        engine_interface.get_window("browser")->rebuild_scrolling_buttons();
+
+        message_log.add_log("Creating directory '"+path+directory+"'");
+    }
+    else{
+        message_log.add_log("Failed to create directory '"+path+directory+"' (invalid filename)");
     }
 }
 
@@ -260,8 +340,79 @@ void Game_World::copy_selected(){
         adb_pull(path,file);
     }
 
+    deselect_all();
+}
+
+void Game_World::copy_selected_on_device(){
+    bool file_copied=false;
+
+    for(int i=0;i<selected_files.size();i++){
+        string path=selected_files[i];
+        string filename=path_to_filename(selected_files[i]);
+
+        boost::algorithm::trim(path);
+        boost::algorithm::trim(filename);
+
+        if(filename.length()>0 && filename!="." && filename!=".."){
+            File_Data file_data=check_file(path);
+
+            if(file_data.exists && file_data.is_readable){
+                run_command(game.option_adb_path+" shell cp -r \""+path+"\" \""+get_current_path()+"\"");
+
+                file_copied=true;
+
+                message_log.add_log("Copying '"+path+"' to '"+get_current_path()+"'");
+            }
+        }
+        else{
+            message_log.add_log("Failed to copy '"+path+"' (invalid filename)");
+        }
+    }
+
     selected_files.clear();
-    update_selected_buttons();
+
+    if(file_copied){
+        engine_interface.get_window("browser")->rebuild_scrolling_buttons();
+    }
+    else{
+        update_selected_buttons();
+    }
+}
+
+void Game_World::move_files(){
+    bool file_moved=false;
+
+    for(int i=0;i<selected_files.size();i++){
+        string path=selected_files[i];
+        string filename=path_to_filename(selected_files[i]);
+
+        boost::algorithm::trim(path);
+        boost::algorithm::trim(filename);
+
+        if(filename.length()>0 && filename!="." && filename!=".."){
+            File_Data file_data=check_file(path);
+
+            if(file_data.exists && file_data.is_readable){
+                run_command(game.option_adb_path+" shell mv \""+path+"\" \""+get_current_path()+"\"");
+
+                file_moved=true;
+
+                message_log.add_log("Moving '"+path+"' to '"+get_current_path()+"'");
+            }
+        }
+        else{
+            message_log.add_log("Failed to move '"+path+"' (invalid filename)");
+        }
+    }
+
+    selected_files.clear();
+
+    if(file_moved){
+        engine_interface.get_window("browser")->rebuild_scrolling_buttons();
+    }
+    else{
+        update_selected_buttons();
+    }
 }
 
 void Game_World::delete_selected(){
@@ -339,6 +490,9 @@ void Game_World::adb_pull(string starting_path,string file,string cd){
                 message_log.add_log("Pulling '"+path+"' to '"+engine_interface.get_home_directory()+"files/"+cd+"'");
             }
         }
+    }
+    else{
+        message_log.add_log("Failed to pull '"+starting_path+cd+file+"' (invalid filename)");
     }
 }
 

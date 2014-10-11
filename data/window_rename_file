@@ -1,0 +1,35 @@
+<window>
+	name:rename_file
+	starting_position:-1,-1
+	width:1280
+	height:129
+	title:Rename File
+	close_function:rename_file
+	
+	<info>
+		location:2,36
+		special_text:rename_file
+	</info>
+	
+	<info>
+		location:2,80
+		mutable:true
+		max_text_length:181
+		allowed_input:backspace,space,letters,numbers,symbols_posix
+		font:small
+		background_type:standard
+	</info>
+	
+	<button>
+		location:590,102
+		text:OK
+		event:rename_file
+	</button>
+	
+	<button>
+		location:624,102
+		text:Cancel
+		event:close_window
+	</button>
+	
+</window>

@@ -11,6 +11,9 @@ void Window::exec_close_function(){
         else if(close_function=="confirm_delete_selected"){
             informations[1].text="";
         }
+        else if(close_function=="rename_file"){
+            set_info_text(0,"");
+        }
         else{
             message_log.add_error("Invalid close function: '"+close_function+"'");
         }

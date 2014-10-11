@@ -10,7 +10,7 @@ namespace Version{
 
 	//Version
 	static const int MAJOR=0;
-	static const int MINOR=2;
+	static const int MINOR=3;
 	static const int MICRO=0;
 
 	//Status

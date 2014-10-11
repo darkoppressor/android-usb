@@ -41,7 +41,7 @@
 <game_command>
 	name:select_all
 	title:Select All
-	description:Select all files/directories in the current directory (must hold Control)
+	description:Select all files/directories in the current directory
 	developer:false
 	key:A
 	controller_button:rightshoulder
@@ -49,12 +49,62 @@
 </game_command>
 
 <game_command>
+	name:deselect_all
+	title:Deselect All
+	description:Deselect all files/directories
+	developer:false
+	key:Z
+	controller_button:
+	controller_axis:
+</game_command>
+
+<game_command>
+	name:rename
+	title:Rename
+	description:Rename the currently selected file
+	developer:false
+	key:F2
+	controller_button:
+	controller_axis:
+</game_command>
+
+<game_command>
+	name:create_directory
+	title:Create New Directory
+	description:Create a new directory in the current directory
+	developer:false
+	key:F3
+	controller_button:
+	controller_axis:
+</game_command>
+
+<game_command>
 	name:copy
 	title:Copy
-	description:Copy all currently selected files to the computer (must hold Control)
+	description:Copy all currently selected files to the computer
 	developer:false
 	key:C
 	controller_button:x
+	controller_axis:
+</game_command>
+
+<game_command>
+	name:copy_device
+	title:Copy on Device
+	description:Copy all currently selected files to the current directory
+	developer:false
+	key:V
+	controller_button:
+	controller_axis:
+</game_command>
+
+<game_command>
+	name:move
+	title:Move
+	description:Move all currently selected files to the current directory
+	developer:false
+	key:X
+	controller_button:
 	controller_axis:
 </game_command>
 

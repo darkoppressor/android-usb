@@ -104,10 +104,15 @@ bool Game::handle_game_command_gui(string command_name){
             help+="Clicking on a directory navigates to it.\n\n";
             help+="Drag files/directories onto the program window to copy them from your computer to the current directory.\n\n";
             help+="Hold Control (or the Left Shoulder button on a gamepad) when clicking on a file/directory to select it.\n";
-            help+="Press A (or the Right Shoulder button on a gamepad) to select all files in the current directory.\n\n";
+            help+="Press A (or the Right Shoulder button on a gamepad) to select all files/directories in the current directory.\n";
+            help+="Press Z to deselect all selected files/directories.\n\n";
             help+="Press C (or the X button on a gamepad) to copy all selected files/directories to your computer.\n";
+            help+="Press V to copy all selected files/directories to the current directory.\n";
+            help+="Press X to move all selected files/directories to the current directory.\n";
+            help+="Press F2 (with one file/directory selected) to rename a selected file/directory.\n";
+            help+="Press F3 to create a new directory in the current directory.\n";
             help+="Files copied to your computer are located in '"+engine_interface.get_home_directory()+"files/'\n";
-            help+="WARNING: Copying files in either direction has no prompt and simply overwrites any identically\nnamed files already located in the same place. Use wisely.\n\n";
+            help+="WARNING: Copying/moving/renaming files in either direction has no prompt and simply overwrites any identically\nnamed files already located in the same place. Use wisely.\n\n";
             help+="Press Delete (or the Y button on a gamepad) to delete all selected files/directories.\n";
             help+="WARNING: Directories are deleted recursively. Use wisely.\n\n";
             help+="Press H (or the Left Stick on a gamepad) to toggle the display of hidden files and directories.\n";
@@ -158,9 +163,80 @@ bool Game::handle_game_command_gui(string command_name){
         return true;
     }
 
+    //Deselect all
+    else if(command_name=="deselect_all"){
+        world.deselect_all();
+
+        return true;
+    }
+
+    //Rename
+    else if(command_name=="rename"){
+        if(world.selected_files.size()==1){
+            Window* window=engine_interface.get_window("rename_file");
+
+            if(!window->on){
+                window->set_info_text(0,world.path_to_filename(world.selected_files[0]));
+
+                window->toggle_on(true,true);
+
+                engine_interface.set_mutable_info(&window->informations[1]);
+            }
+            else{
+                if(!engine_interface.is_window_on_top(window)){
+                    window->set_info_text(0,world.path_to_filename(world.selected_files[0]));
+
+                    engine_interface.bring_window_to_top(window);
+
+                    engine_interface.set_mutable_info(&window->informations[1]);
+                }
+            }
+        }
+
+        return true;
+    }
+
+    //Create directory
+    else if(command_name=="create_directory"){
+        Window* window=engine_interface.get_window("create_directory");
+
+        if(!window->on){
+            window->set_info_text(0,"");
+
+            window->toggle_on(true,true);
+
+            engine_interface.set_mutable_info(&window->informations[1]);
+        }
+        else{
+            if(!engine_interface.is_window_on_top(window)){
+                window->set_info_text(0,"");
+
+                engine_interface.bring_window_to_top(window);
+
+                engine_interface.set_mutable_info(&window->informations[1]);
+            }
+        }
+
+        return true;
+    }
+
     //Copy
     else if(command_name=="copy"){
         world.copy_selected();
+
+        return true;
+    }
+
+    //Copy on device
+    else if(command_name=="copy_device"){
+        world.copy_selected_on_device();
+
+        return true;
+    }
+
+    //Move
+    else if(command_name=="move"){
+        world.move_files();
 
         return true;
     }

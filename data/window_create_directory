@@ -1,0 +1,34 @@
+<window>
+	name:create_directory
+	starting_position:-1,-1
+	width:1280
+	height:107
+	title:Create New Directory
+	
+	<info>
+		location:2,36
+		special_text:create_directory
+	</info>
+	
+	<info>
+		location:2,58
+		mutable:true
+		max_text_length:181
+		allowed_input:backspace,space,letters,numbers,symbols_posix
+		font:small
+		background_type:standard
+	</info>
+	
+	<button>
+		location:590,80
+		text:OK
+		event:create_directory
+	</button>
+	
+	<button>
+		location:624,80
+		text:Cancel
+		event:close_window
+	</button>
+	
+</window>

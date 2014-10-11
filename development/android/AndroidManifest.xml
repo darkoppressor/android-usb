@@ -4,8 +4,8 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="org.cheeseandbacon.androidusb"
-      android:versionCode="1"
-      android:versionName="0.0.1"
+      android:versionCode="3"
+      android:versionName="0.3.0"
       android:installLocation="auto">
 
     <!-- Create a Java class extending SDLActivity and place it in a

@@ -30,7 +30,12 @@ public:
     void update_selected_buttons();
     void select_file(std::string path,bool only_select=false);
     void select_all();
+    void deselect_all();
+    void rename_file();
+    void create_directory();
     void copy_selected();
+    void copy_selected_on_device();
+    void move_files();
     void delete_selected();
     void adb_push(std::string path,std::string cd="");
     void adb_pull(std::string starting_path,std::string file,std::string cd="");
