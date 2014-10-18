@@ -23,6 +23,14 @@ void Game_World::generate_world(){
         engine_interface.quit();
     }
 
+    string error_check=run_command(game.option_adb_path+" shell echo \"SUCCESS_WOO!\"");
+
+    if(!boost::algorithm::contains(error_check,"SUCCESS_WOO!")){
+        message_log.add_error("Something seems to be wrong with adb");
+
+        engine_interface.quit();
+    }
+
     ///Maybe I should add something around here to help with initially connecting to the device in adb
     ///What if multiple devices are connected?
 
