@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -7,35 +7,33 @@
 
 #include <string>
 
-struct Color_Data{
+struct Color_Data {
     double red;
     double green;
     double blue;
     double alpha;
 };
 
-class Color{
-public:
+class Color {
+    public:
+        std::string name;
+        Color_Data rgb;
 
-    std::string name;
+        Color ();
 
-    Color_Data rgb;
+        double get_red();
+        double get_green();
+        double get_blue();
+        double get_alpha();
 
-    Color();
+        short get_red_short();
+        short get_green_short();
+        short get_blue_short();
+        short get_alpha_short();
 
-    double get_red();
-    double get_green();
-    double get_blue();
-    double get_alpha();
+        void set_rgb(short red, short green, short blue, short alpha = 255);
 
-    short get_red_short();
-    short get_green_short();
-    short get_blue_short();
-    short get_alpha_short();
-
-    void set_rgb(short red,short green,short blue,short alpha=255);
-
-    bool is_equal(Color* color);
+        bool is_equal(Color* color);
 };
 
 #endif

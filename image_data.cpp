@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -8,31 +8,31 @@
 
 using namespace std;
 
-Image_Data::Image_Data(){
-    texture=0;
-    w=0.0;
-    h=0.0;
+Image_Data::Image_Data () {
+    texture = 0;
+    w = 0.0;
+    h = 0.0;
 }
 
-void Image_Data::load_image(string filename){
-    texture=load_texture(filename,this);
+void Image_Data::load_image (string filename) {
+    texture = load_texture(filename, this);
 
-    SDL_SetTextureBlendMode(texture,SDL_BLENDMODE_BLEND);
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 }
 
-void Image_Data::load_image(SDL_Surface* surface){
-    w=surface->w;
-    h=surface->h;
+void Image_Data::load_image (SDL_Surface* surface) {
+    w = surface->w;
+    h = surface->h;
 
-    texture=SDL_CreateTextureFromSurface(main_window.renderer,surface);
+    texture = SDL_CreateTextureFromSurface(main_window.renderer, surface);
 
-    SDL_SetTextureBlendMode(texture,SDL_BLENDMODE_BLEND);
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 }
 
-void Image_Data::unload_image(){
+void Image_Data::unload_image () {
     SDL_DestroyTexture(texture);
 
-    texture=0;
-    w=0.0;
-    h=0.0;
+    texture = 0;
+    w = 0.0;
+    h = 0.0;
 }

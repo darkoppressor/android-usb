@@ -1,28 +1,27 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
 #ifndef update_h
 #define update_h
 
-class Update{
-public:
+class Update {
+    public:
+        void tick();
 
-	void tick();
+        void ai();
 
-    void ai();
+        void input();
 
-    void input();
+        void movement();
 
-    void movement();
+        void events();
 
-    void events();
+        void animate();
 
-    void animate();
+        void camera(int frame_rate, double ms_per_frame, int logic_frame_rate);
 
-    void camera(int frame_rate,double ms_per_frame,int logic_frame_rate);
-
-    void render(int frame_rate,double ms_per_frame,int logic_frame_rate);
+        void render(int frame_rate, double ms_per_frame, int logic_frame_rate);
 };
 
 #endif

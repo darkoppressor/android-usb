@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -8,62 +8,61 @@
 
 using namespace std;
 
-Timer::Timer(){
-    start_ticks=0;
-    paused_ticks=0;
-    paused=false;
-    started=false;
+Timer::Timer () {
+    start_ticks = 0;
+    paused_ticks = 0;
+    paused = false;
+    started = false;
 }
 
-void Timer::start(){
-    started=true;
+void Timer::start () {
+    started = true;
 
-    paused=false;
+    paused = false;
 
-    start_ticks=SDL_GetTicks();
+    start_ticks = SDL_GetTicks();
 }
 
-void Timer::stop(){
-    started=false;
+void Timer::stop () {
+    started = false;
 
-    paused=false;
+    paused = false;
 }
 
-uint32_t Timer::get_ticks(){
-    if(started){
-        if(paused){
+uint32_t Timer::get_ticks () {
+    if (started) {
+        if (paused) {
             return paused_ticks;
-        }
-        else{
-            return SDL_GetTicks()-start_ticks;
+        } else {
+            return SDL_GetTicks() - start_ticks;
         }
     }
 
     return 0;
 }
 
-void Timer::pause(){
-    if(started && !paused){
-        paused=true;
+void Timer::pause () {
+    if (started && !paused) {
+        paused = true;
 
-        paused_ticks=SDL_GetTicks()-start_ticks;
+        paused_ticks = SDL_GetTicks() - start_ticks;
     }
 }
 
-void Timer::unpause(){
-    if(paused){
-        paused=false;
+void Timer::unpause () {
+    if (paused) {
+        paused = false;
 
-        start_ticks=SDL_GetTicks()-paused_ticks;
+        start_ticks = SDL_GetTicks() - paused_ticks;
 
-        paused_ticks=0;
+        paused_ticks = 0;
     }
 }
 
-bool Timer::is_started(){
+bool Timer::is_started () {
     return started;
 }
 
-bool Timer::is_paused(){
+bool Timer::is_paused () {
     return paused;
 }

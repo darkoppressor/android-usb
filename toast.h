@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -7,26 +7,23 @@
 
 #include <string>
 
-class Toast{
-public:
+class Toast {
+    public:
+        std::string message;
+        short x, y;
+        short w, h;
+        double opacity;
+        double fade_rate;
 
-    std::string message;
+        Toast (std::string get_message, double get_fade_rate);
 
-    short x,y;
-    short w,h;
+        void set_dimensions(std::string font);
 
-    double opacity;
-    double fade_rate;
+        bool is_done();
 
-    Toast(std::string get_message,double get_fade_rate);
+        void animate();
 
-    void set_dimensions(std::string font);
-
-    bool is_done();
-
-    void animate();
-
-    void render();
+        void render();
 };
 
 #endif

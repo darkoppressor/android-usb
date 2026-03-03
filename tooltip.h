@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -7,25 +7,23 @@
 
 #include <string>
 
-class Tooltip{
-public:
+class Tooltip {
+    public:
+        bool on;
 
-    bool on;
+        std::string message;
 
-    std::string message;
+        std::string font;
+        short x, y;
+        short w, h;
 
-    std::string font;
+        Tooltip ();
 
-    short x,y;
-    short w,h;
+        void setup(std::string get_message, int mouse_x, int mouse_y);
 
-    Tooltip();
+        void set_dimensions();
 
-    void setup(std::string get_message,int mouse_x,int mouse_y);
-
-    void set_dimensions();
-
-    void render();
+        void render();
 };
 
 #endif

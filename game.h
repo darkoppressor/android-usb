@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -13,96 +13,88 @@
 #include <string>
 #include <vector>
 
-class Game{
-public:
+class Game {
+    public:
+        uint32_t option_effect_limit;
+        double option_camera_speed;
+        double option_camera_zoom;
+        std::string option_name;
+        bool option_chat_timestamps;
+        uint32_t option_max_players;
+        bool option_screen_shake;
+        std::string option_adb_path;
+        std::string option_starting_path;
+        bool option_hidden_files;
+        bool display_scoreboard;
+        RNG rng;
 
-    uint32_t option_effect_limit;
-    double option_camera_speed;
-    double option_camera_zoom;
-    std::string option_name;
-    bool option_chat_timestamps;
-    uint32_t option_max_players;
-    bool option_screen_shake;
-    std::string option_adb_path;
-    std::string option_starting_path;
-    bool option_hidden_files;
+        // If true, a game is currently in progress.
+        // If false, a game is not in progress.
+        bool in_progress;
 
-    bool display_scoreboard;
+        // If true, the game is paused.
+        // If false, the game is not paused.
+        bool paused;
 
-    RNG rng;
+        // Current movement state of the camera.
+        std::string cam_state;
 
-    //If true, a game is currently in progress.
-    //If false, a game is not in progress.
-    bool in_progress;
+        // Holds a string representing each command that is currently in the on state, and is relevant for networking.
+        // This is updated each frame.
+        std::vector<std::string> command_states;
+        Collision_Rect camera;
+        double camera_delta_x;
+        double camera_delta_y;
+        double camera_speed;
+        double camera_zoom;
+        Screen_Shake screen_shake;
 
-    //If true, the game is paused.
-    //If false, the game is not paused.
-    bool paused;
+        std::string current_music;
+        Game_World world;
 
-    //Current movement state of the camera.
-    std::string cam_state;
+        Game ();
 
-    //Holds a string representing each command that is currently in the on state, and is relevant for networking.
-    //This is updated each frame.
-    std::vector<std::string> command_states;
+        void reset();
+        void reset_camera_dimensions();
 
-    Collision_Rect camera;
+        std::string get_random_direction_cardinal();
+        std::string get_random_direction_cardinal_ordinal();
 
-    double camera_delta_x;
-    double camera_delta_y;
+        // Returns true if the number of effects does not exceed the effect limit.
+        bool effect_allowed();
 
-    double camera_speed;
-    double camera_zoom;
+        void manage_music();
 
-    Screen_Shake screen_shake;
+        void toggle_pause();
 
-    std::string current_music;
+        void start();
+        void start_client();
+        void stop();
 
-    Game_World world;
+        void center_camera(Collision_Rect box);
+        void center_camera(Collision_Circ circle);
 
-    Game();
+        void zoom_camera_in(Collision_Rect box);
+        void zoom_camera_in(Collision_Circ circle);
 
-    void reset();
-    void reset_camera_dimensions();
+        void zoom_camera_out(Collision_Rect box);
+        void zoom_camera_out(Collision_Circ circle);
 
-    std::string get_random_direction_cardinal();
-    std::string get_random_direction_cardinal_ordinal();
+        void set_camera();
 
-    //Returns true if the number of effects does not exceed the effect limit.
-    bool effect_allowed();
+        void render_scoreboard();
 
-    void manage_music();
+        void prepare_for_input();
 
-    void toggle_pause();
+        void handle_command_states_multiplayer();
+        void handle_game_commands_multiplayer();
 
-    void start();
-    void start_client();
-    void stop();
-
-    void center_camera(Collision_Rect box);
-    void center_camera(Collision_Circ circle);
-
-    void zoom_camera_in(Collision_Rect box);
-    void zoom_camera_in(Collision_Circ circle);
-
-    void zoom_camera_out(Collision_Rect box);
-    void zoom_camera_out(Collision_Circ circle);
-
-    void set_camera();
-
-    void render_scoreboard();
-
-    void prepare_for_input();
-
-    void handle_command_states_multiplayer();
-    void handle_game_commands_multiplayer();
-
-    void handle_input_states_gui();
-    void handle_input_states();
-    bool handle_game_command_gui(std::string command_name);
-    bool handle_game_command(std::string command_name);
-    bool handle_input_events_gui();
-    bool handle_input_events();
+        void handle_input_states_gui();
+        void handle_input_states();
+        bool handle_game_command_gui(std::string command_name);
+        bool handle_game_command(std::string command_name);
+        bool handle_input_events_gui();
+        bool handle_input_events();
 };
 
 #endif

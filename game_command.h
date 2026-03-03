@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -9,24 +9,21 @@
 
 #include <SDL.h>
 
-class Game_Command{
-public:
+class Game_Command {
+    public:
+        std::string name;
+        std::string title;
+        std::string description;
+        bool dev;
+        SDL_Scancode key;
+        SDL_GameControllerButton button;
+        SDL_GameControllerAxis axis;
 
-    std::string name;
-    std::string title;
-    std::string description;
+        Game_Command ();
 
-    bool dev;
-
-    SDL_Scancode key;
-    SDL_GameControllerButton button;
-    SDL_GameControllerAxis axis;
-
-    Game_Command();
-
-    bool key_valid();
-    bool button_valid();
-    bool axis_valid();
+        bool key_valid();
+        bool button_valid();
+        bool axis_valid();
 };
 
 #endif

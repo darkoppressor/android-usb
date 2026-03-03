@@ -1,38 +1,35 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
 #ifndef screen_shake_h
 #define screen_shake_h
 
-class Screen_Shake{
-public:
+class Screen_Shake {
+    public:
+        // Valid range: 0.001-0.999
+        double magnitude;
+        // Length of the shake in milliseconds
+        int length;
+        double direction;
+        double x;
+        double y;
+        double distance_moved;
+        bool returning;
+        double camera_real_x;
+        double camera_real_y;
 
-    //Valid range: 0.001-0.999
-    double magnitude;
-    //Length of the shake in milliseconds
-    int length;
+        Screen_Shake ();
 
-    double direction;
-    double x;
-    double y;
-    double distance_moved;
-    bool returning;
+        void reset();
 
-    double camera_real_x;
-    double camera_real_y;
+        bool is_active();
 
-    Screen_Shake();
+        void change_direction();
 
-    void reset();
+        void add_shake(double get_magnitude, int get_length);
 
-    bool is_active();
-
-    void change_direction();
-
-    void add_shake(double get_magnitude,int get_length);
-
-    void movement();
+        void movement();
 };
 
 #endif

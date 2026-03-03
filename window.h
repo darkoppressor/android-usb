@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -12,147 +12,143 @@
 #include <vector>
 #include <string>
 
-class Window{
-public:
+class Window {
+    public:
+        std::string name;
 
-    std::string name;
+        // The coordinate location and dimensions
+        short x, y;
+        short w, h;
 
-    //The coordinate location and dimensions
-    short x,y;
-    short w,h;
+        // The starting coordinates
+        short start_x;
+        short start_y;
 
-    //The starting coordinates
-    short start_x;
-    short start_y;
+        // The starting size
+        // This is only used when fit_content is true
+        short start_width;
+        short start_height;
+        bool fit_content;
 
-    //The starting size
-    //This is only used when fit_content is true
-    short start_width;
-    short start_height;
+        // The offsets from the mouse to the edge of the window.
+        // Used for window movement.
+        short mouse_offset_x, mouse_offset_y;
 
-    bool fit_content;
+        std::string title;
 
-    //The offsets from the mouse to the edge of the window.
-    //Used for window movement.
-    short mouse_offset_x,mouse_offset_y;
+        std::string font;
+        std::string font_color;
+        Sprite border;
+        Sprite background;
 
-    std::string title;
+        // If true, the window is processed.
+        // If false, the window is not processed.
+        bool on;
 
-    std::string font;
-    std::string font_color;
+        // If true, the window is currently being dragged with the mouse.
+        // If false, the window is not moving.
+        bool moving;
 
-    Sprite border;
+        // If true, do not allow standard means of closing this window.
+        // If false, this window can close normally.
+        bool disallow_closing;
 
-    Sprite background;
+        // If true, do not allow other windows to be opened while this window is open.
+        // If false, allow other windows.
+        bool exclusive;
 
-    //If true, the window is processed.
-    //If false, the window is not processed.
-    bool on;
+        // Prevent buttons from being sorted by their y position for GUI nav purposes.
+        bool no_button_sort;
 
-    //If true, the window is currently being dragged with the mouse.
-    //If false, the window is not moving.
-    bool moving;
+        // If this string is not empty, it identifies which scrolling buttons list this window should display.
+        std::string scrolling_buttons;
 
-    //If true, do not allow standard means of closing this window.
-    //If false, this window can close normally.
-    bool disallow_closing;
+        // If this string is not empty, it identifies what the close function should do.
+        std::string close_function;
 
-    //If true, do not allow other windows to be opened while this window is open.
-    //If false, allow other windows.
-    bool exclusive;
+        // The last button that is NOT part of the scrolling button list.
+        int last_normal_button;
+        int scroll_offset;
+        bool need_to_rebuild_scrolling_buttons;
 
-    //Prevent buttons from being sorted by their y position for GUI nav purposes.
-    bool no_button_sort;
+        // All of the information pieces that this window has.
+        std::vector<Information> informations;
 
-    //If this string is not empty, it identifies which scrolling buttons list this window should display.
-    std::string scrolling_buttons;
+        // All of the buttons that this window has.
+        std::vector<Button> buttons;
 
-    //If this string is not empty, it identifies what the close function should do.
-    std::string close_function;
+        Window ();
 
-    //The last button that is NOT part of the scrolling button list.
-    int last_normal_button;
+        // Returns the text from the mutable info represented by the passed number.
+        // This number relates only to mutable infos.
+        // Returns an empty string if the passed number does not correspond to a mutable info.
+        std::string get_info_text(int mutable_info_number);
+        // Sets the text in the mutable info represented by the passed number.
+        // This number relates only to mutable infos.
+        void set_info_text(int mutable_info_number, std::string get_text);
 
-    int scroll_offset;
+        void set_default_font();
 
-    bool need_to_rebuild_scrolling_buttons;
+        void set_dimensions();
 
-    //All of the information pieces that this window has.
-    std::vector<Information> informations;
+        void create_close_button();
 
-    //All of the buttons that this window has.
-    std::vector<Button> buttons;
+        void exec_close_function();
 
-    Window();
+        // This should be called only once, after creating all buttons including the close button, but before the first
+        // call to build_scrolling_buttons().
+        void set_last_normal_button();
 
-    //Returns the text from the mutable info represented by the passed number.
-    //This number relates only to mutable infos.
-    //Returns an empty string if the passed number does not correspond to a mutable info.
-    std::string get_info_text(int mutable_info_number);
-    //Sets the text in the mutable info represented by the passed number.
-    //This number relates only to mutable infos.
-    void set_info_text(int mutable_info_number,std::string get_text);
+        // Returns true if the button with the passed index is part of the scrolling list.
+        // Returns false if the button is a normal button or does not exist.
+        bool is_button_scrolling(int index);
 
-    void set_default_font();
+        // Returns the y offset for the scrolling button with passed index.
+        // Returns -1 if the button is a normal button or does not exist.
+        int get_scrolling_button_offset(int index);
 
-    void set_dimensions();
+        // Returns the position in the list of scrolling buttons for the scrolling button with passed index.
+        // Returns -1 if the button is a normal button or does not exist.
+        int get_scrolling_button_position(int index);
 
-    void create_close_button();
+        // Returns the number of scrolling buttons in the scrolling buttons list.
+        int get_scrolling_button_count();
 
-    void exec_close_function();
+        // Returns true if this button is a scrolling button and is currently being displayed on-screen.
+        // Returns false if this button is not being displayed on-screen, is not a scrolling button, or does not exist.
+        bool is_scrolling_button_on_screen(int index);
 
-    //This should be called only once, after creating all buttons including the close button, but before the first call to build_scrolling_buttons().
-    void set_last_normal_button();
+        // Returns true if this scrolling button is above the scrolling button area.
+        // Returns false if this scrolling button is below the scrolling button area.
+        // Also returns false if this button is within the scrolling button area, is not a scrolling button, or doesn't
+        // exist.
+        bool off_screen_scrolling_button_direction(int index);
 
-    //Returns true if the button with the passed index is part of the scrolling list.
-    //Returns false if the button is a normal button or does not exist.
-    bool is_button_scrolling(int index);
+        // Call this to cause build_scrolling_buttons to be called when it is safe.
+        void rebuild_scrolling_buttons();
+        // Do NOT call this on its own. Use rebuild_scrolling_buttons().
+        void build_scrolling_buttons();
 
-    //Returns the y offset for the scrolling button with passed index.
-    //Returns -1 if the button is a normal button or does not exist.
-    int get_scrolling_button_offset(int index);
+        void center_in_game_window();
 
-    //Returns the position in the list of scrolling buttons for the scrolling button with passed index.
-    //Returns -1 if the button is a normal button or does not exist.
-    int get_scrolling_button_position(int index);
+        void reset_scrolling_lists();
 
-    //Returns the number of scrolling buttons in the scrolling buttons list.
-    int get_scrolling_button_count();
+        void toggle_on(bool force = false, bool force_value = false);
 
-    //Returns true if this button is a scrolling button and is currently being displayed on-screen.
-    //Returns false if this button is not being displayed on-screen, is not a scrolling button, or does not exist.
-    bool is_scrolling_button_on_screen(int index);
+        // Resets the moused over state of all buttons.
+        void reset_buttons_moused_over();
 
-    //Returns true if this scrolling button is above the scrolling button area.
-    //Returns false if this scrolling button is below the scrolling button area.
-    //Also returns false if this button is within the scrolling button area, is not a scrolling button, or doesn't exist.
-    bool off_screen_scrolling_button_direction(int index);
+        void scroll_up();
+        void scroll_down();
 
-    //Call this to cause build_scrolling_buttons to be called when it is safe.
-    void rebuild_scrolling_buttons();
-    //Do NOT call this on its own. Use rebuild_scrolling_buttons().
-    void build_scrolling_buttons();
+        void handle_input_states();
 
-    void center_in_game_window();
+        // Returns true if the event was consumed,
+        // false otherwise.
+        bool handle_input_events();
 
-    void reset_scrolling_lists();
-
-    void toggle_on(bool force=false,bool force_value=false);
-
-    //Resets the moused over state of all buttons.
-    void reset_buttons_moused_over();
-
-    void scroll_up();
-    void scroll_down();
-
-    void handle_input_states();
-
-    //Returns true if the event was consumed,
-    //false otherwise.
-    bool handle_input_events();
-
-    void animate();
-    void render();
+        void animate();
+        void render();
 };
 
 #endif

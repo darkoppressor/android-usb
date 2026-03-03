@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -11,22 +11,19 @@
 
 #include <SDL.h>
 
-class Cursor{
-public:
+class Cursor {
+    public:
+        std::string name;
+        Sprite sprite;
+        SDL_Cursor* hw_cursor;
 
-    std::string name;
+        Cursor ();
 
-    Sprite sprite;
+        void load_hw_cursor();
+        void free_hw_cursor();
 
-    SDL_Cursor* hw_cursor;
-
-    Cursor();
-
-    void load_hw_cursor();
-    void free_hw_cursor();
-
-    void animate();
-    void render(int x,int y);
+        void animate();
+        void render(int x, int y);
 };
 
 #endif

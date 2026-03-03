@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -7,31 +7,30 @@
 
 #include <string>
 
-class Sprite{
-public:
+class Sprite {
+    public:
+        std::string name;
+        int frame;
+        int frame_counter;
 
-    std::string name;
+        // If true, the sprite will animate (if there is an animation connected to it).
+        // If false, the sprite will not even try to animate.
+        bool animating;
 
-    int frame;
-    int frame_counter;
+        Sprite ();
 
-    //If true, the sprite will animate (if there is an animation connected to it).
-    //If false, the sprite will not even try to animate.
-    bool animating;
+        double get_width();
+        double get_height();
 
-    Sprite();
+        bool is_animated();
 
-    double get_width();
-    double get_height();
+        void reset_animation();
 
-    bool is_animated();
+        void set_name(std::string get_name);
 
-    void reset_animation();
-
-    void set_name(std::string get_name);
-
-    void animate(int animation_speed_override=-1);
-    void render(double x,double y,double opacity=1.0,double scale_x=1.0,double scale_y=1.0,double angle=0.0,std::string color_name="white");
+        void animate(int animation_speed_override = -1);
+        void render(double x, double y, double opacity = 1.0, double scale_x = 1.0, double scale_y = 1.0,
+                    double angle = 0.0, std::string color_name = "white");
 };
 
 #endif

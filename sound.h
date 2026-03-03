@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -12,30 +12,30 @@
 
 #include <SDL_mixer.h>
 
-class Sound{
-public:
+class Sound {
+    public:
+        std::vector<Sound_Data> sounds;
 
-    std::vector<Sound_Data> sounds;
+        std::vector<std::string> sound_names;
 
-    std::vector<std::string> sound_names;
+        void load_sounds();
+        void unload_sounds();
 
-    void load_sounds();
-    void unload_sounds();
+        // Modifies volume by applying the appropriate audio option multipliers.
+        int modify_sound_volume(int volume);
 
-    //Modifies volume by applying the appropriate audio option multipliers.
-    int modify_sound_volume(int volume);
+        int get_free_channel();
 
-    int get_free_channel();
+        // If coordinates are not given, the sound is played at maximum volume.
+        // falloff determines the rate at which a positional sound falls off.
+        // The higher falloff is, the more slowly sounds will fade out as the distance between the sound receiver and
+        // the sound source increases.
+        // So a low falloff means the sound will quickly falloff.
+        void play_sound(std::string sound_name);
+        void play_sound(std::string sound_name, double sound_x, double sound_y, double falloff = -1.0);
+        void _play_sound(Sound_Data* ptr_sound, int volume);
 
-    //If coordinates are not given, the sound is played at maximum volume.
-    //falloff determines the rate at which a positional sound falls off.
-    //The higher falloff is, the more slowly sounds will fade out as the distance between the sound receiver and the sound source increases.
-    //So a low falloff means the sound will quickly falloff.
-    void play_sound(std::string sound_name);
-    void play_sound(std::string sound_name,double sound_x,double sound_y,double falloff=-1.0);
-    void _play_sound(Sound_Data* ptr_sound,int volume);
-
-    Sound_Data* get_sound(std::string sound_name);
+        Sound_Data* get_sound(std::string sound_name);
 };
 
 #endif

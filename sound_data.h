@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -9,16 +9,15 @@
 
 #include <SDL_mixer.h>
 
-class Sound_Data{
-public:
+class Sound_Data {
+    public:
+        Mix_Chunk* chunk;
 
-    Mix_Chunk* chunk;
+        Sound_Data ();
 
-    Sound_Data();
+        void load_sound(std::string filename);
 
-    void load_sound(std::string filename);
-
-    void unload_sound();
+        void unload_sound();
 };
 
 #endif

@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -7,14 +7,13 @@
 
 #include <string>
 
-class Message_Log{
-public:
+class Message_Log {
+    public:
+        void clear_error_log();
 
-    void clear_error_log();
+        void add_error(std::string message);
 
-    void add_error(std::string message);
-
-    void add_log(std::string message);
+        void add_log(std::string message);
 };
 
 #endif

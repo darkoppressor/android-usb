@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -9,20 +9,19 @@
 
 #include <SDL.h>
 
-class Image_Data{
-public:
+class Image_Data {
+    public:
+        SDL_Texture* texture;
+        double w;
+        double h;
 
-    SDL_Texture* texture;
-    double w;
-    double h;
+        Image_Data ();
 
-    Image_Data();
+        void load_image(std::string filename);
 
-    void load_image(std::string filename);
+        void load_image(SDL_Surface* surface);
 
-    void load_image(SDL_Surface* surface);
-
-    void unload_image();
+        void unload_image();
 };
 
 #endif

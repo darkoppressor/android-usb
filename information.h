@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -10,83 +10,79 @@
 #include <string>
 #include <vector>
 
-class Information{
-public:
+class Information {
+    public:
+        // The coordinate location.
+        // This location, as used by a window, is an offset from the window, not the actual screen.
+        short x, y;
+        short w, h;
 
-    //The coordinate location.
-    //This location, as used by a window, is an offset from the window, not the actual screen.
-    short x,y;
+        // The starting coordinates.
+        short start_x;
+        short start_y;
 
-    short w,h;
+        // Only one of text, special_info_text, special_info_sprite, and sprite should be used.
 
-    //The starting coordinates.
-    short start_x;
-    short start_y;
+        std::string text;
+        std::string tooltip_text;
 
-    //Only one of text, special_info_text, special_info_sprite, and sprite should be used.
+        // If true, text is mutable.
+        // If false, text is immutable.
+        bool text_mutable;
+        // The maximum length of text when it is mutable.
+        int max_text_length;
+        // The kind of text input(s) allowed for a mutable string.
+        std::vector<std::string> allowed_input;
+        bool scrolling;
+        // The dimensions (in characters for width and lines for height) of the scroll box.
+        // Obviously only applies if scrolling is true.
+        int scroll_width;
+        int scroll_height;
+        int scroll_offset;
 
-    std::string text;
-    std::string tooltip_text;
+        std::string special_info_text;
+        std::string special_info_sprite;
+        Sprite sprite;
+        std::string background_type;
+        double background_opacity;
 
-    //If true, text is mutable.
-    //If false, text is immutable.
-    bool text_mutable;
-    //The maximum length of text when it is mutable.
-    int max_text_length;
-    //The kind of text input(s) allowed for a mutable string.
-    std::vector<std::string> allowed_input;
+        std::string font;
+        std::string font_color;
 
-    bool scrolling;
-    //The dimensions (in characters for width and lines for height) of the scroll box.
-    //Obviously only applies if scrolling is true.
-    int scroll_width;
-    int scroll_height;
-    int scroll_offset;
+        Information ();
 
-    std::string special_info_text;
-    std::string special_info_sprite;
+        void set_default_font();
 
-    Sprite sprite;
-    std::string background_type;
-    double background_opacity;
+        void set_dimensions();
 
-    std::string font;
-    std::string font_color;
+        void center_in_window(int window_width, int window_height);
 
-    Information();
+        void set_text(std::string get_text);
 
-    void set_default_font();
+        // If there is special info text, this function sets the text.
+        // This is used to create strings that take some runtime stuff into account.
+        void set_special_text();
 
-    void set_dimensions();
+        // If there is a special info sprite, this function sets the sprite.
+        // This is used to create sprites that take some runtime stuff into account.
+        void set_special_sprite();
 
-    void center_in_window(int window_width,int window_height);
+        // Returns true if the passed input type is allowed.
+        bool allows_input(std::string input_type);
 
-    void set_text(std::string get_text);
+        void begin_editing();
 
-    //If there is special info text, this function sets the text.
-    //This is used to create strings that take some runtime stuff into account.
-    void set_special_text();
+        void scroll_up(short y_offset);
+        void scroll_down(short y_offset);
 
-    //If there is a special info sprite, this function sets the sprite.
-    //This is used to create sprites that take some runtime stuff into account.
-    void set_special_sprite();
+        void handle_input_states(int mouse_x, int mouse_y, short x_offset, short y_offset);
 
-    //Returns true if the passed input type is allowed.
-    bool allows_input(std::string input_type);
+        // Returns true if the event was consumed,
+        // false otherwise.
+        bool handle_input_events(int mouse_x, int mouse_y, short x_offset, short y_offset);
 
-    void begin_editing();
-
-    void scroll_up(short y_offset);
-    void scroll_down(short y_offset);
-
-    void handle_input_states(int mouse_x,int mouse_y,short x_offset,short y_offset);
-
-    //Returns true if the event was consumed,
-    //false otherwise.
-    bool handle_input_events(int mouse_x,int mouse_y,short x_offset,short y_offset);
-
-    void animate();
-    void render(short x_offset,short y_offset);
+        void animate();
+        void render(short x_offset, short y_offset);
 };
 
 #endif

@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -32,8 +32,8 @@
 #include <cmath>
 #include <cstdio>
 
-const int CONTROLLER_ID_ALL=-1;
-const int CONTROLLER_ID_TOUCH=-2;
+const int CONTROLLER_ID_ALL = -1;
+const int CONTROLLER_ID_TOUCH = -2;
 
 extern bool world_loaded;
 

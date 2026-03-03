@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -7,40 +7,36 @@
 
 #include <SDL.h>
 
-class Game_Window{
+class Game_Window {
     private:
     public:
+        Game_Window ();
 
-    Game_Window();
+        void cleanup_video();
 
-    void cleanup_video();
+        bool set_resolution(short* desired_resolution_x, short* desired_resolution_y);
 
-    bool set_resolution(short* desired_resolution_x,short* desired_resolution_y);
+        bool initialize_video();
 
-    bool initialize_video();
+        bool init_sdl();
 
-    bool init_sdl();
+        void set_sdl_hints();
 
-    void set_sdl_hints();
+        // Returns true if everything initialized properly.
+        // Returns false if initializing failed.
+        bool init();
 
-    //Returns true if everything initialized properly.
-    //Returns false if initializing failed.
-    bool init();
+        void screenshot();
 
-    void screenshot();
+        void reinitialize();
 
-    void reinitialize();
-
-    //The logical resolution of the game window.
-    short SCREEN_WIDTH;
-    short SCREEN_HEIGHT;
-
-    SDL_Window* screen;
-
-    SDL_Renderer* renderer;
-
-    SDL_Surface* icon;
-    Uint32 icon_colorkey;
+        // The logical resolution of the game window.
+        short SCREEN_WIDTH;
+        short SCREEN_HEIGHT;
+        SDL_Window* screen;
+        SDL_Renderer* renderer;
+        SDL_Surface* icon;
+        Uint32 icon_colorkey;
 };
 
 #endif

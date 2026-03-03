@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -7,13 +7,12 @@
 
 #include "rtt_data.h"
 
-class Rtt_Manager{
-public:
+class Rtt_Manager {
+    public:
+        ///Rtt_Data example;
 
-    ///Rtt_Data example;
-
-    void create_textures();
-    void unload_textures();
+        void create_textures();
+        void unload_textures();
 };
 
 #endif

@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -9,20 +9,19 @@
 
 #include <SDL.h>
 
-class Rtt_Data{
-public:
+class Rtt_Data {
+    public:
+        SDL_Texture* texture;
+        double w;
+        double h;
 
-    SDL_Texture* texture;
-    double w;
-    double h;
+        Rtt_Data ();
 
-    Rtt_Data();
+        void create_texture(double get_w, double get_h);
+        void unload_texture();
 
-    void create_texture(double get_w,double get_h);
-    void unload_texture();
-
-    void make_render_target();
-    void reset_render_target();
+        void make_render_target();
+        void reset_render_target();
 };
 
 #endif

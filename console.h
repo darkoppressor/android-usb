@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -8,93 +8,87 @@
 #include "information.h"
 #include "timer.h"
 
-class Console{
-public:
+class Console {
+    public:
+        // If true, this is a chat box.
+        // If false, it is the main console.
+        bool chat;
+        Information info_display;
+        Information info_input;
+        int y;
+        bool on;
 
-    //If true, this is a chat box.
-    //If false, it is the main console.
-    bool chat;
+        std::string last_tab_complete_command;
 
-    Information info_display;
-    Information info_input;
+        // 0 or below means instant.
+        int move_speed;
+        int max_command_length;
 
-    int y;
+        // The maximum lines to recall in the console log.
+        int max_log_recall;
 
-    bool on;
+        // The maximum number of commands to recall.
+        int max_command_recall;
 
-    std::string last_tab_complete_command;
+        // The last command strings entered.
+        std::vector<std::string> recalled_command_strings;
 
-    //0 or below means instant.
-    int move_speed;
+        // The currently recalled string.
+        // Used for scrolling around in the recalled strings.
+        int current_recalled_command_string;
 
-    int max_command_length;
+        std::string font;
+        std::string font_color;
+        double background_opacity;
 
-    //The maximum lines to recall in the console log.
-    int max_log_recall;
+        std::vector<std::string> commands;
 
-    //The maximum number of commands to recall.
-    int max_command_recall;
+        // The time it takes for a chat line to disappear, in milliseconds.
+        int line_timeout;
 
-    //The last command strings entered.
-    std::vector<std::string> recalled_command_strings;
+        // Used to determine if a chat message should be showed even if the chat window is closed.
+        std::vector<Timer> text_timers;
 
-    //The currently recalled string.
-    //Used for scrolling around in the recalled strings.
-    int current_recalled_command_string;
+        Console ();
 
-    std::string font;
-    std::string font_color;
+        void setup(bool get_chat);
 
-    double background_opacity;
+        void reset_current_recalled_command_string();
 
-    std::vector<std::string> commands;
+        void reset_text_timers();
 
-    //The time it takes for a chat line to disappear, in milliseconds.
-    int line_timeout;
+        void clear_text();
 
-    //Used to determine if a chat message should be showed even if the chat window is closed.
-    std::vector<Timer> text_timers;
+        void toggle_on();
 
-    Console();
+        void add_text(std::string text);
 
-    void setup(bool get_chat);
+        void send_chat();
 
-    void reset_current_recalled_command_string();
+        void move();
 
-    void reset_text_timers();
+        void recall_up();
+        void recall_down();
+        void tab_complete();
 
-    void clear_text();
+        void handle_input_states();
 
-    void toggle_on();
+        // Returns true if the event was consumed,
+        // false otherwise.
+        bool handle_input_events();
 
-    void add_text(std::string text);
+        void animate();
+        void render();
 
-    void send_chat();
+        void setup_commands();
 
-    void move();
+        std::vector<std::string> parse_input(std::string str_input);
 
-    void recall_up();
-    void recall_down();
-    void tab_complete();
+        // Pass an option to check for and an options string from parsed input data.
+        // Returns whether or not the option is in the options list.
+        bool input_has_option(std::string option, std::string options);
 
-    void handle_input_states();
-
-    //Returns true if the event was consumed,
-    //false otherwise.
-    bool handle_input_events();
-
-    void animate();
-    void render();
-
-    void setup_commands();
-
-    std::vector<std::string> parse_input(std::string str_input);
-
-    //Pass an option to check for and an options string from parsed input data.
-    //Returns whether or not the option is in the options list.
-    bool input_has_option(std::string option,std::string options);
-
-    void do_command();
+        void do_command();
 };
 
 #endif

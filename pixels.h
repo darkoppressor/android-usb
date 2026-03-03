@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Cheese and Bacon Games, LLC */
+/* Copyright (c) Cheese and Bacon Games */
 /* This file is licensed under the MIT License. */
 /* See the file docs/LICENSE.txt for the full license text. */
 
@@ -9,8 +9,8 @@
 
 #include <SDL.h>
 
-Color surface_get_pixel(SDL_Surface* surface,int x,int y);
+Color surface_get_pixel(SDL_Surface* surface, int x, int y);
 
-void surface_put_pixel(SDL_Surface* surface,int x,int y,Color color);
+void surface_put_pixel(SDL_Surface* surface, int x, int y, Color color);
 
 #endif
